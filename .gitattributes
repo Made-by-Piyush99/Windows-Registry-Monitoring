@@ -1,0 +1,28 @@
+# Auto detect text files and perform LF normalization on checkout
+* text=auto
+
+# Source code and documentation (LF line endings)
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Windows specific files (CRLF line endings)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.iss text eol=crlf
+
+# Binary assets
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+
+# Git LFS for Large Binaries (Executable Installers & Standalone Binaries)
+*.exe filter=lfs diff=lfs merge=lfs -text
+*.msi filter=lfs diff=lfs merge=lfs -text

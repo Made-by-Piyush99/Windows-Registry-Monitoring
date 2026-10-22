@@ -1,0 +1,24 @@
+# Windows Registry Change Monitoring System
+# ==========================================
+# Core registry access and polling rely on Python's standard library.
+# Visual & Graphical Reporting uses Pillow and pandas.
+#
+# Production packages for Graphical Reporting & Analytics:
+pillow>=10.0.0      # Image generation, canvas rendering, typography & in-GUI image display
+pandas>=2.0.0       # Dataframe grouping, cross-tabulation, aggregations & metric tables
+#
+# Required standard library modules (built-in with Python on Windows):
+#   - winreg (Windows Registry access, Windows-only)
+#   - tkinter (GUI framework, usually included with Python)
+#   - json, csv, hashlib, logging, os, pathlib, time
+#   - threading, queue, datetime, uuid, re, shutil
+#
+# Python version: 3.11 or later
+# Platform: Windows only
+#
+# Install visual reporting packages:
+#   pip install pillow pandas
+#
+# Verify installation:
+#   python -c "import winreg, tkinter, PIL, pandas; print('All core & visual reporting packages ready!')"
+

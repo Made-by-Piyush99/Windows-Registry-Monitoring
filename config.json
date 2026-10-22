@@ -1,0 +1,86 @@
+{
+  "polling_interval_seconds": 5,
+  "monitored_paths": [
+    {
+      "category": "Startup - Current User",
+      "paths": [
+        {"hive": "HKEY_CURRENT_USER", "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"},
+        {"hive": "HKEY_CURRENT_USER", "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce"}
+      ]
+    },
+    {
+      "category": "Startup - Local Machine",
+      "paths": [
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce"}
+      ]
+    },
+    {
+      "category": "Windows Defender",
+      "paths": [
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Features"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows Defender"}
+      ]
+    },
+    {
+      "category": "Windows Firewall",
+      "paths": [
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\PublicProfile"}
+      ]
+    },
+    {
+      "category": "Security Policy & UAC",
+      "paths": [
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Installer"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Control\\Lsa"}
+      ]
+    },
+    {
+      "category": "Services & Drivers",
+      "paths": [
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\WinDefend"},
+        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\mpssvc"}
+      ]
+    }
+  ],
+  "alert_settings": {
+    "popup_enabled": true,
+    "popup_severity_threshold": "informational",
+    "popup_rate_limit_seconds": 3,
+    "max_queued_alerts": 50,
+    "mute_popups": false
+  },
+  "file_checks": {
+    "resolve_paths": true,
+    "compute_sha256": true,
+    "check_file_exists": true,
+    "collect_file_metadata": true
+  },
+  "logging": {
+    "log_directory": "data/logs",
+    "app_log_file": "app.log",
+    "event_log_file": "events.jsonl",
+    "max_log_size_mb": 10,
+    "log_retention_days": 90
+  },
+  "reporting": {
+    "output_directory": "data/reports",
+    "csv_export_enabled": true
+  },
+  "baseline": {
+    "file_path": "data/baseline.json",
+    "auto_create_on_first_run": false
+  },
+  "hide_taskbar_icon": true,
+  "minimize_to_floating_icon": true,
+  "registry_views": {
+    "scan_64bit": true,
+    "scan_32bit": true
+  }
+}

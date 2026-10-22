@@ -1,0 +1,2183 @@
+{
+  "metadata": {
+    "description": "Windows Registry selected-path baseline. This is NOT a complete registry backup. Only explicitly configured paths are scanned.",
+    "created_at": "2026-10-22T14:27:30.187781+00:00",
+    "completed_at": "2026-10-22T14:27:30.316377+00:00",
+    "duration_seconds": 0.128596,
+    "scan_type": "selected_paths",
+    "total_keys_scanned": 34,
+    "total_values_captured": 170,
+    "total_errors": 0,
+    "total_access_denied": 0,
+    "total_not_found": 4,
+    "categories_scanned": [
+      "Startup - Current User",
+      "Startup - Local Machine",
+      "Windows Defender",
+      "Windows Firewall",
+      "Security Policy & UAC",
+      "Services & Drivers"
+    ],
+    "registry_views": {
+      "64bit": true,
+      "32bit": true
+    },
+    "integrity_sha256": "3873ed0647c65b632121c4fad8e281da65a00f5362a69ef05e22b180fafde40e"
+  },
+  "scan_results": [
+    {
+      "full_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "hive": "HKEY_CURRENT_USER",
+      "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "status": "ok",
+      "values": [
+        {
+          "name": "OneDrive",
+          "data": "\"C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "OneDrive",
+            "value_data": "\"C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background",
+              "expanded_value": "\"C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background",
+              "executable_path": "C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe",
+              "arguments": "/background",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe",
+              "exists": true,
+              "size_bytes": 4751760,
+              "modified_time": "2026-07-11T13:06:02.039852+00:00",
+              "sha256": "e1513e6ab525dfd455416af474c6c826f413126c8b996fd586141c99240517f5",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "LANNoticeClient",
+          "data": "\"\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe\"",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "LANNoticeClient",
+            "value_data": "\"\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe\"",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe\"",
+              "expanded_value": "\"\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe\"",
+              "executable_path": "\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe",
+              "arguments": "",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe",
+              "exists": true,
+              "size_bytes": 152576,
+              "modified_time": "2026-08-14T13:04:35.380956+00:00",
+              "sha256": "42797d1608dd71b7e90c88ccd6ea7d077aafaacfe825720006343023abdd17f9",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "GoogleChromeAutoLaunch_361C1DD22E1256C6B68316A32E8B1949",
+          "data": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --no-startup-window /prefetch:5",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "GoogleChromeAutoLaunch_361C1DD22E1256C6B68316A32E8B1949",
+            "value_data": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --no-startup-window /prefetch:5",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --no-startup-window /prefetch:5",
+              "expanded_value": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --no-startup-window /prefetch:5",
+              "executable_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+              "arguments": "--no-startup-window /prefetch:5",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+              "exists": true,
+              "size_bytes": 4720792,
+              "modified_time": "2026-10-15T03:16:59.406347+00:00",
+              "sha256": "de999bce6a1c954df71a8f15bf751b336172f55ac1a0325bb0580cbc2121268c",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "Myraa",
+          "data": "cmd /c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "Myraa",
+            "value_data": "cmd /c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "cmd /c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+              "expanded_value": "cmd /c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+              "executable_path": "cmd",
+              "arguments": "/c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+              "parse_method": "unquoted",
+              "file_type": "unknown"
+            },
+            "file_metadata": {
+              "path": "cmd",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.187795+00:00",
+      "category": "Startup - Current User"
+    },
+    {
+      "full_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "hive": "HKEY_CURRENT_USER",
+      "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "status": "ok",
+      "values": [
+        {
+          "name": "OneDrive",
+          "data": "\"C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "OneDrive",
+            "value_data": "\"C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background",
+              "expanded_value": "\"C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background",
+              "executable_path": "C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe",
+              "arguments": "/background",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe",
+              "exists": true,
+              "size_bytes": 4751760,
+              "modified_time": "2026-07-11T13:06:02.039852+00:00",
+              "sha256": "e1513e6ab525dfd455416af474c6c826f413126c8b996fd586141c99240517f5",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "LANNoticeClient",
+          "data": "\"\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe\"",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "LANNoticeClient",
+            "value_data": "\"\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe\"",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe\"",
+              "expanded_value": "\"\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe\"",
+              "executable_path": "\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe",
+              "arguments": "",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "\\\\c18\\D\\1. Online Projects\\LAN_BASED_NOTICE\\LanNotice.Client\\bin\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\LanNotice.Client.exe",
+              "exists": true,
+              "size_bytes": 152576,
+              "modified_time": "2026-08-14T13:04:35.380956+00:00",
+              "sha256": "42797d1608dd71b7e90c88ccd6ea7d077aafaacfe825720006343023abdd17f9",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "GoogleChromeAutoLaunch_361C1DD22E1256C6B68316A32E8B1949",
+          "data": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --no-startup-window /prefetch:5",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "GoogleChromeAutoLaunch_361C1DD22E1256C6B68316A32E8B1949",
+            "value_data": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --no-startup-window /prefetch:5",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --no-startup-window /prefetch:5",
+              "expanded_value": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --no-startup-window /prefetch:5",
+              "executable_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+              "arguments": "--no-startup-window /prefetch:5",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+              "exists": true,
+              "size_bytes": 4720792,
+              "modified_time": "2026-10-15T03:16:59.406347+00:00",
+              "sha256": "de999bce6a1c954df71a8f15bf751b336172f55ac1a0325bb0580cbc2121268c",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "Myraa",
+          "data": "cmd /c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "Myraa",
+            "value_data": "cmd /c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "cmd /c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+              "expanded_value": "cmd /c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+              "executable_path": "cmd",
+              "arguments": "/c \"C:\\Program Files\\MYRAA\\resources\\agent\\_internal\\start-myraa-silent.bat\"",
+              "parse_method": "unquoted",
+              "file_type": "unknown"
+            },
+            "file_metadata": {
+              "path": "cmd",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.187899+00:00",
+      "category": "Startup - Current User"
+    },
+    {
+      "full_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "hive": "HKEY_CURRENT_USER",
+      "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "status": "ok",
+      "values": [],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.268273+00:00",
+      "category": "Startup - Current User"
+    },
+    {
+      "full_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "hive": "HKEY_CURRENT_USER",
+      "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "status": "ok",
+      "values": [],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.268333+00:00",
+      "category": "Startup - Current User"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "status": "ok",
+      "values": [
+        {
+          "name": "SecurityHealth",
+          "data": "%windir%\\system32\\SecurityHealthSystray.exe",
+          "type": "REG_EXPAND_SZ",
+          "type_id": 2,
+          "resolved_file": {
+            "value_name": "SecurityHealth",
+            "value_data": "%windir%\\system32\\SecurityHealthSystray.exe",
+            "value_type": "REG_EXPAND_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "%windir%\\system32\\SecurityHealthSystray.exe",
+              "expanded_value": "C:\\Windows\\system32\\SecurityHealthSystray.exe",
+              "executable_path": "C:\\Windows\\system32\\SecurityHealthSystray.exe",
+              "arguments": "",
+              "parse_method": "unquoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\Windows\\system32\\SecurityHealthSystray.exe",
+              "exists": true,
+              "size_bytes": 84992,
+              "modified_time": "2026-09-30T03:27:21.867840+00:00",
+              "sha256": "7f2fe5ed8fa26f044dbbb0db6b633c8feaa2c683880d5c3842a5927f85a2d3be",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "RTHDVCPL",
+          "data": "\"C:\\Program Files\\Realtek\\Audio\\HDA\\RtkNGUI64.exe\" -s",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "RTHDVCPL",
+            "value_data": "\"C:\\Program Files\\Realtek\\Audio\\HDA\\RtkNGUI64.exe\" -s",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\Program Files\\Realtek\\Audio\\HDA\\RtkNGUI64.exe\" -s",
+              "expanded_value": "\"C:\\Program Files\\Realtek\\Audio\\HDA\\RtkNGUI64.exe\" -s",
+              "executable_path": "C:\\Program Files\\Realtek\\Audio\\HDA\\RtkNGUI64.exe",
+              "arguments": "-s",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\Program Files\\Realtek\\Audio\\HDA\\RtkNGUI64.exe",
+              "exists": true,
+              "size_bytes": 9243072,
+              "modified_time": "2017-12-27T18:44:50+00:00",
+              "sha256": "7c1489dbdc991756949fe7e4f2091150605e70307c5628565bf6e6048c3549e1",
+              "error": null
+            }
+          }
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.268375+00:00",
+      "category": "Startup - Local Machine"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "status": "ok",
+      "values": [],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.268419+00:00",
+      "category": "Startup - Local Machine"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "status": "ok",
+      "values": [],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.294893+00:00",
+      "category": "Startup - Local Machine"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "status": "ok",
+      "values": [
+        {
+          "name": "{dcbbd1e2-a175-4488-a309-568a0303ba12}",
+          "data": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "{dcbbd1e2-a175-4488-a309-568a0303ba12}",
+            "value_data": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+              "expanded_value": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+              "executable_path": "C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe",
+              "arguments": "/burn.runonce",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe",
+              "exists": true,
+              "size_bytes": 1310944,
+              "modified_time": "2026-10-22T14:23:05.756979+00:00",
+              "sha256": "287f91be3b5948ad4587a42bedfc1e7beba7b6607346f5e3dce9116cdd4ee29c",
+              "error": null
+            }
+          }
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.294949+00:00",
+      "category": "Startup - Local Machine"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "status": "ok",
+      "values": [],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.298839+00:00",
+      "category": "Startup - Local Machine"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "status": "ok",
+      "values": [],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.298897+00:00",
+      "category": "Startup - Local Machine"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "status": "ok",
+      "values": [
+        {
+          "name": "{dcbbd1e2-a175-4488-a309-568a0303ba12}",
+          "data": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "{dcbbd1e2-a175-4488-a309-568a0303ba12}",
+            "value_data": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+              "expanded_value": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+              "executable_path": "C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe",
+              "arguments": "/burn.runonce",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe",
+              "exists": true,
+              "size_bytes": 1310944,
+              "modified_time": "2026-10-22T14:23:05.756979+00:00",
+              "sha256": "287f91be3b5948ad4587a42bedfc1e7beba7b6607346f5e3dce9116cdd4ee29c",
+              "error": null
+            }
+          }
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.298936+00:00",
+      "category": "Startup - Local Machine"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "status": "ok",
+      "values": [
+        {
+          "name": "{dcbbd1e2-a175-4488-a309-568a0303ba12}",
+          "data": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "{dcbbd1e2-a175-4488-a309-568a0303ba12}",
+            "value_data": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+            "value_type": "REG_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+              "expanded_value": "\"C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe\" /burn.runonce",
+              "executable_path": "C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe",
+              "arguments": "/burn.runonce",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\ProgramData\\Package Cache\\{dcbbd1e2-a175-4488-a309-568a0303ba12}\\PBIDesktopSetup_x64.exe",
+              "exists": true,
+              "size_bytes": 1310944,
+              "modified_time": "2026-10-22T14:23:05.756979+00:00",
+              "sha256": "287f91be3b5948ad4587a42bedfc1e7beba7b6607346f5e3dce9116cdd4ee29c",
+              "error": null
+            }
+          }
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.298973+00:00",
+      "category": "Startup - Local Machine"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DpaDisabled",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.306475+00:00",
+      "category": "Windows Defender"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection",
+      "status": "not_found",
+      "values": [],
+      "error_message": "Registry key not found: HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection (32bit view). The key may not exist on this system.",
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.306558+00:00",
+      "category": "Windows Defender"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender\\Features",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Features",
+      "status": "ok",
+      "values": [
+        {
+          "name": "TamperProtection",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "TPExclusions",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "MpPlatformKillbitsFromEngine",
+          "data": "0000000400000000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "MpPlatformKillbitsExFromEngine",
+          "data": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "EnableWdAiNiDrv",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "TamperProtectionSource",
+          "data": 5,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableCACS",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "MpCapability",
+          "data": "1f00000000000000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.307784+00:00",
+      "category": "Windows Defender"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender\\Features",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Features",
+      "status": "not_found",
+      "values": [],
+      "error_message": "Registry key not found: HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender\\Features (32bit view). The key may not exist on this system.",
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.307922+00:00",
+      "category": "Windows Defender"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+      "status": "ok",
+      "values": [],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.308746+00:00",
+      "category": "Windows Defender"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+      "status": "ok",
+      "values": [],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.308832+00:00",
+      "category": "Windows Defender"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DisableNotifications",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableFirewall",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.308884+00:00",
+      "category": "Windows Firewall"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DisableNotifications",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableFirewall",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.308932+00:00",
+      "category": "Windows Firewall"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DisableNotifications",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableFirewall",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.308977+00:00",
+      "category": "Windows Firewall"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DisableNotifications",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableFirewall",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.309015+00:00",
+      "category": "Windows Firewall"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\PublicProfile",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\PublicProfile",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DisableNotifications",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableFirewall",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.309057+00:00",
+      "category": "Windows Firewall"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\PublicProfile",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\PublicProfile",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DisableNotifications",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableFirewall",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.309092+00:00",
+      "category": "Windows Firewall"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "status": "ok",
+      "values": [
+        {
+          "name": "ConsentPromptBehaviorAdmin",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "ConsentPromptBehaviorUser",
+          "data": 3,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "DSCAutomationHostEnabled",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableCursorSuppression",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableFullTrustStartupTasks",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableInstallerDetection",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableLUA",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableSecureUIAPaths",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableUIADesktopToggle",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableUwpStartupTasks",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableVirtualization",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "PromptOnSecureDesktop",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SupportFullTrustStartupTasks",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SupportUwpStartupTasks",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "ValidateAdminCodeSignatures",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "dontdisplaylastusername",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "legalnoticecaption",
+          "data": "",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "legalnoticecaption",
+            "value_data": "",
+            "value_type": "REG_SZ",
+            "resolution_status": "empty_value",
+            "command_info": null,
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "legalnoticetext",
+          "data": "",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "legalnoticetext",
+            "value_data": "",
+            "value_type": "REG_SZ",
+            "resolution_status": "empty_value",
+            "command_info": null,
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "scforceoption",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "shutdownwithoutlogon",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "undockwithoutlogon",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.309139+00:00",
+      "category": "Security Policy & UAC"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "status": "ok",
+      "values": [
+        {
+          "name": "ConsentPromptBehaviorAdmin",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "ConsentPromptBehaviorUser",
+          "data": 3,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "DSCAutomationHostEnabled",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableCursorSuppression",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableFullTrustStartupTasks",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableInstallerDetection",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableLUA",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableSecureUIAPaths",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableUIADesktopToggle",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableUwpStartupTasks",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "EnableVirtualization",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "PromptOnSecureDesktop",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SupportFullTrustStartupTasks",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SupportUwpStartupTasks",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "ValidateAdminCodeSignatures",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "dontdisplaylastusername",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "legalnoticecaption",
+          "data": "",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "legalnoticecaption",
+            "value_data": "",
+            "value_type": "REG_SZ",
+            "resolution_status": "empty_value",
+            "command_info": null,
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "legalnoticetext",
+          "data": "",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "legalnoticetext",
+            "value_data": "",
+            "value_type": "REG_SZ",
+            "resolution_status": "empty_value",
+            "command_info": null,
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "scforceoption",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "shutdownwithoutlogon",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "undockwithoutlogon",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.309277+00:00",
+      "category": "Security Policy & UAC"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Installer",
+      "status": "not_found",
+      "values": [],
+      "error_message": "Registry key not found: HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer (64bit view). The key may not exist on this system.",
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.309436+00:00",
+      "category": "Security Policy & UAC"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Installer",
+      "status": "not_found",
+      "values": [],
+      "error_message": "Registry key not found: HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer (32bit view). The key may not exist on this system.",
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.310222+00:00",
+      "category": "Security Policy & UAC"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "status": "ok",
+      "values": [
+        {
+          "name": "auditbasedirectories",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "auditbaseobjects",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Bounds",
+          "data": "0030000000200000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "crashonauditfail",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "fullprivilegeauditing",
+          "data": "00",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "LimitBlankPasswordUse",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "NoLmHash",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Security Packages",
+          "data": [
+            "\"\""
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "Notification Packages",
+          "data": [
+            "scecli"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "Authentication Packages",
+          "data": [
+            "msv1_0"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "LsaPid",
+          "data": 760,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "LsaCfgFlagsDefault",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SecureBoot",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "ProductType",
+          "data": 6,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "disabledomaincreds",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "everyoneincludesanonymous",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "forceguest",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "restrictanonymous",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "restrictanonymoussam",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.311301+00:00",
+      "category": "Security Policy & UAC"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "status": "ok",
+      "values": [
+        {
+          "name": "auditbasedirectories",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "auditbaseobjects",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Bounds",
+          "data": "0030000000200000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "crashonauditfail",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "fullprivilegeauditing",
+          "data": "00",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "LimitBlankPasswordUse",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "NoLmHash",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Security Packages",
+          "data": [
+            "\"\""
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "Notification Packages",
+          "data": [
+            "scecli"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "Authentication Packages",
+          "data": [
+            "msv1_0"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "LsaPid",
+          "data": 760,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "LsaCfgFlagsDefault",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SecureBoot",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "ProductType",
+          "data": 6,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "disabledomaincreds",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "everyoneincludesanonymous",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "forceguest",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "restrictanonymous",
+          "data": 0,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "restrictanonymoussam",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.311480+00:00",
+      "category": "Security Policy & UAC"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\WinDefend",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\WinDefend",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DependOnService",
+          "data": [
+            "RpcSs"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "Description",
+          "data": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "Description",
+            "value_data": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+              "expanded_value": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+              "executable_path": "@C:\\ProgramData\\Microsoft\\Windows",
+              "arguments": "Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+              "parse_method": "unquoted",
+              "file_type": "unknown"
+            },
+            "file_metadata": {
+              "path": "@C:\\ProgramData\\Microsoft\\Windows",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        },
+        {
+          "name": "DisplayName",
+          "data": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "DisplayName",
+            "value_data": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+              "expanded_value": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+              "executable_path": "@C:\\ProgramData\\Microsoft\\Windows",
+              "arguments": "Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+              "parse_method": "unquoted",
+              "file_type": "unknown"
+            },
+            "file_metadata": {
+              "path": "@C:\\ProgramData\\Microsoft\\Windows",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        },
+        {
+          "name": "ErrorControl",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "FailureActions",
+          "data": "805101000000000001000000030000001400000001000000e803000001000000102700000100000060ea0000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "ImagePath",
+          "data": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe\"",
+          "type": "REG_EXPAND_SZ",
+          "type_id": 2,
+          "resolved_file": {
+            "value_name": "ImagePath",
+            "value_data": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe\"",
+            "value_type": "REG_EXPAND_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe\"",
+              "expanded_value": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe\"",
+              "executable_path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe",
+              "arguments": "",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe",
+              "exists": true,
+              "size_bytes": 378168,
+              "modified_time": "2026-10-15T11:54:44.711958+00:00",
+              "sha256": "40b12c524a42abfe4a33f955916ef1e43c3ed1866466de2314e0ec307064b4d3",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "LaunchProtected",
+          "data": 3,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "ObjectName",
+          "data": "LocalSystem",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "ObjectName",
+            "value_data": "LocalSystem",
+            "value_type": "REG_SZ",
+            "resolution_status": "unresolved",
+            "command_info": {
+              "original_value": "LocalSystem",
+              "expanded_value": "LocalSystem",
+              "executable_path": null,
+              "arguments": "",
+              "parse_method": "unresolved",
+              "file_type": "unknown"
+            },
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "RequiredPrivileges",
+          "data": [
+            "SeImpersonatePrivilege",
+            "SeBackupPrivilege",
+            "SeRestorePrivilege",
+            "SeDebugPrivilege",
+            "SeChangeNotifyPrivilege",
+            "SeLoadDriverPrivilege",
+            "SeSecurityPrivilege",
+            "SeShutdownPrivilege",
+            "SeIncreaseQuotaPrivilege",
+            "SeAssignPrimaryTokenPrivilege",
+            "SeTcbPrivilege",
+            "SeIncreaseBasePriorityPrivilege",
+            "SeSystemEnvironmentPrivilege",
+            "SeTakeOwnershipPrivilege"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "ServiceSidType",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Start",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Type",
+          "data": 16,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.311636+00:00",
+      "category": "Services & Drivers"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\WinDefend",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\WinDefend",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DependOnService",
+          "data": [
+            "RpcSs"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "Description",
+          "data": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "Description",
+            "value_data": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+              "expanded_value": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+              "executable_path": "@C:\\ProgramData\\Microsoft\\Windows",
+              "arguments": "Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-240",
+              "parse_method": "unquoted",
+              "file_type": "unknown"
+            },
+            "file_metadata": {
+              "path": "@C:\\ProgramData\\Microsoft\\Windows",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        },
+        {
+          "name": "DisplayName",
+          "data": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "DisplayName",
+            "value_data": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+              "expanded_value": "@C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+              "executable_path": "@C:\\ProgramData\\Microsoft\\Windows",
+              "arguments": "Defender\\Platform\\4.18.26090.9-0\\MpAsDesc.dll,-310",
+              "parse_method": "unquoted",
+              "file_type": "unknown"
+            },
+            "file_metadata": {
+              "path": "@C:\\ProgramData\\Microsoft\\Windows",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        },
+        {
+          "name": "ErrorControl",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "FailureActions",
+          "data": "805101000000000001000000030000001400000001000000e803000001000000102700000100000060ea0000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "ImagePath",
+          "data": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe\"",
+          "type": "REG_EXPAND_SZ",
+          "type_id": 2,
+          "resolved_file": {
+            "value_name": "ImagePath",
+            "value_data": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe\"",
+            "value_type": "REG_EXPAND_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe\"",
+              "expanded_value": "\"C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe\"",
+              "executable_path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe",
+              "arguments": "",
+              "parse_method": "quoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26090.9-0\\MsMpEng.exe",
+              "exists": true,
+              "size_bytes": 378168,
+              "modified_time": "2026-10-15T11:54:44.711958+00:00",
+              "sha256": "40b12c524a42abfe4a33f955916ef1e43c3ed1866466de2314e0ec307064b4d3",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "LaunchProtected",
+          "data": 3,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "ObjectName",
+          "data": "LocalSystem",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "ObjectName",
+            "value_data": "LocalSystem",
+            "value_type": "REG_SZ",
+            "resolution_status": "unresolved",
+            "command_info": {
+              "original_value": "LocalSystem",
+              "expanded_value": "LocalSystem",
+              "executable_path": null,
+              "arguments": "",
+              "parse_method": "unresolved",
+              "file_type": "unknown"
+            },
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "RequiredPrivileges",
+          "data": [
+            "SeImpersonatePrivilege",
+            "SeBackupPrivilege",
+            "SeRestorePrivilege",
+            "SeDebugPrivilege",
+            "SeChangeNotifyPrivilege",
+            "SeLoadDriverPrivilege",
+            "SeSecurityPrivilege",
+            "SeShutdownPrivilege",
+            "SeIncreaseQuotaPrivilege",
+            "SeAssignPrimaryTokenPrivilege",
+            "SeTcbPrivilege",
+            "SeIncreaseBasePriorityPrivilege",
+            "SeSystemEnvironmentPrivilege",
+            "SeTakeOwnershipPrivilege"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "ServiceSidType",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Start",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Type",
+          "data": 16,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.311757+00:00",
+      "category": "Services & Drivers"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\mpssvc",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\mpssvc",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DependOnService",
+          "data": [
+            "mpsdrv",
+            "bfe"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "Description",
+          "data": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23091",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "Description",
+            "value_data": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23091",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23091",
+              "expanded_value": "@C:\\Windows\\system32\\FirewallAPI.dll,-23091",
+              "executable_path": "@C:\\Windows\\system32\\FirewallAPI.dll,-23091",
+              "arguments": "",
+              "parse_method": "unquoted",
+              "file_type": "file(.dll,-23091)"
+            },
+            "file_metadata": {
+              "path": "@C:\\Windows\\system32\\FirewallAPI.dll,-23091",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        },
+        {
+          "name": "DisplayName",
+          "data": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23090",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "DisplayName",
+            "value_data": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23090",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23090",
+              "expanded_value": "@C:\\Windows\\system32\\FirewallAPI.dll,-23090",
+              "executable_path": "@C:\\Windows\\system32\\FirewallAPI.dll,-23090",
+              "arguments": "",
+              "parse_method": "unquoted",
+              "file_type": "file(.dll,-23090)"
+            },
+            "file_metadata": {
+              "path": "@C:\\Windows\\system32\\FirewallAPI.dll,-23090",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        },
+        {
+          "name": "ErrorControl",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "FailureActions",
+          "data": "80510100000000000000000003000000140000000200000060ea00000200000060ea00000200000060ea0000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "Group",
+          "data": "NetworkProvider",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "Group",
+            "value_data": "NetworkProvider",
+            "value_type": "REG_SZ",
+            "resolution_status": "unresolved",
+            "command_info": {
+              "original_value": "NetworkProvider",
+              "expanded_value": "NetworkProvider",
+              "executable_path": null,
+              "arguments": "",
+              "parse_method": "unresolved",
+              "file_type": "unknown"
+            },
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "ImagePath",
+          "data": "%SystemRoot%\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+          "type": "REG_EXPAND_SZ",
+          "type_id": 2,
+          "resolved_file": {
+            "value_name": "ImagePath",
+            "value_data": "%SystemRoot%\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+            "value_type": "REG_EXPAND_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "%SystemRoot%\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+              "expanded_value": "C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+              "executable_path": "C:\\Windows\\system32\\svchost.exe",
+              "arguments": "-k LocalServiceNoNetworkFirewall -p",
+              "parse_method": "unquoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\Windows\\system32\\svchost.exe",
+              "exists": true,
+              "size_bytes": 53744,
+              "modified_time": "2019-03-19T04:44:33.676911+00:00",
+              "sha256": "dd191a5b23df92e12a8852291f9fb5ed594b76a28a5a464418442584afd1e048",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "ObjectName",
+          "data": "NT Authority\\LocalService",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "ObjectName",
+            "value_data": "NT Authority\\LocalService",
+            "value_type": "REG_SZ",
+            "resolution_status": "unresolved",
+            "command_info": {
+              "original_value": "NT Authority\\LocalService",
+              "expanded_value": "NT Authority\\LocalService",
+              "executable_path": null,
+              "arguments": "",
+              "parse_method": "unresolved",
+              "file_type": "unknown"
+            },
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "RequiredPrivileges",
+          "data": [
+            "SeAssignPrimaryTokenPrivilege",
+            "SeAuditPrivilege",
+            "SeChangeNotifyPrivilege",
+            "SeCreateGlobalPrivilege",
+            "SeImpersonatePrivilege",
+            "SeIncreaseQuotaPrivilege"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "ServiceSidType",
+          "data": 3,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Start",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SvcHostSplitDisable",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SvcMemHardLimitInMB",
+          "data": 27,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SvcMemMidLimitInMB",
+          "data": 20,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SvcMemSoftLimitInMB",
+          "data": 12,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Type",
+          "data": 32,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "64bit",
+      "scan_timestamp": "2026-10-22T14:27:30.314795+00:00",
+      "category": "Services & Drivers"
+    },
+    {
+      "full_path": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\mpssvc",
+      "hive": "HKEY_LOCAL_MACHINE",
+      "subkey": "SYSTEM\\CurrentControlSet\\Services\\mpssvc",
+      "status": "ok",
+      "values": [
+        {
+          "name": "DependOnService",
+          "data": [
+            "mpsdrv",
+            "bfe"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "Description",
+          "data": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23091",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "Description",
+            "value_data": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23091",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23091",
+              "expanded_value": "@C:\\Windows\\system32\\FirewallAPI.dll,-23091",
+              "executable_path": "@C:\\Windows\\system32\\FirewallAPI.dll,-23091",
+              "arguments": "",
+              "parse_method": "unquoted",
+              "file_type": "file(.dll,-23091)"
+            },
+            "file_metadata": {
+              "path": "@C:\\Windows\\system32\\FirewallAPI.dll,-23091",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        },
+        {
+          "name": "DisplayName",
+          "data": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23090",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "DisplayName",
+            "value_data": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23090",
+            "value_type": "REG_SZ",
+            "resolution_status": "file_not_found",
+            "command_info": {
+              "original_value": "@%SystemRoot%\\system32\\FirewallAPI.dll,-23090",
+              "expanded_value": "@C:\\Windows\\system32\\FirewallAPI.dll,-23090",
+              "executable_path": "@C:\\Windows\\system32\\FirewallAPI.dll,-23090",
+              "arguments": "",
+              "parse_method": "unquoted",
+              "file_type": "file(.dll,-23090)"
+            },
+            "file_metadata": {
+              "path": "@C:\\Windows\\system32\\FirewallAPI.dll,-23090",
+              "exists": false,
+              "size_bytes": null,
+              "modified_time": null,
+              "sha256": null,
+              "error": "File not found"
+            }
+          }
+        },
+        {
+          "name": "ErrorControl",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "FailureActions",
+          "data": "80510100000000000000000003000000140000000200000060ea00000200000060ea00000200000060ea0000",
+          "type": "REG_BINARY",
+          "type_id": 3
+        },
+        {
+          "name": "Group",
+          "data": "NetworkProvider",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "Group",
+            "value_data": "NetworkProvider",
+            "value_type": "REG_SZ",
+            "resolution_status": "unresolved",
+            "command_info": {
+              "original_value": "NetworkProvider",
+              "expanded_value": "NetworkProvider",
+              "executable_path": null,
+              "arguments": "",
+              "parse_method": "unresolved",
+              "file_type": "unknown"
+            },
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "ImagePath",
+          "data": "%SystemRoot%\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+          "type": "REG_EXPAND_SZ",
+          "type_id": 2,
+          "resolved_file": {
+            "value_name": "ImagePath",
+            "value_data": "%SystemRoot%\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+            "value_type": "REG_EXPAND_SZ",
+            "resolution_status": "resolved",
+            "command_info": {
+              "original_value": "%SystemRoot%\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+              "expanded_value": "C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+              "executable_path": "C:\\Windows\\system32\\svchost.exe",
+              "arguments": "-k LocalServiceNoNetworkFirewall -p",
+              "parse_method": "unquoted",
+              "file_type": "executable"
+            },
+            "file_metadata": {
+              "path": "C:\\Windows\\system32\\svchost.exe",
+              "exists": true,
+              "size_bytes": 53744,
+              "modified_time": "2019-03-19T04:44:33.676911+00:00",
+              "sha256": "dd191a5b23df92e12a8852291f9fb5ed594b76a28a5a464418442584afd1e048",
+              "error": null
+            }
+          }
+        },
+        {
+          "name": "ObjectName",
+          "data": "NT Authority\\LocalService",
+          "type": "REG_SZ",
+          "type_id": 1,
+          "resolved_file": {
+            "value_name": "ObjectName",
+            "value_data": "NT Authority\\LocalService",
+            "value_type": "REG_SZ",
+            "resolution_status": "unresolved",
+            "command_info": {
+              "original_value": "NT Authority\\LocalService",
+              "expanded_value": "NT Authority\\LocalService",
+              "executable_path": null,
+              "arguments": "",
+              "parse_method": "unresolved",
+              "file_type": "unknown"
+            },
+            "file_metadata": null
+          }
+        },
+        {
+          "name": "RequiredPrivileges",
+          "data": [
+            "SeAssignPrimaryTokenPrivilege",
+            "SeAuditPrivilege",
+            "SeChangeNotifyPrivilege",
+            "SeCreateGlobalPrivilege",
+            "SeImpersonatePrivilege",
+            "SeIncreaseQuotaPrivilege"
+          ],
+          "type": "REG_MULTI_SZ",
+          "type_id": 7
+        },
+        {
+          "name": "ServiceSidType",
+          "data": 3,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Start",
+          "data": 2,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SvcHostSplitDisable",
+          "data": 1,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SvcMemHardLimitInMB",
+          "data": 27,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SvcMemMidLimitInMB",
+          "data": 20,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "SvcMemSoftLimitInMB",
+          "data": 12,
+          "type": "REG_DWORD",
+          "type_id": 4
+        },
+        {
+          "name": "Type",
+          "data": 32,
+          "type": "REG_DWORD",
+          "type_id": 4
+        }
+      ],
+      "error_message": null,
+      "view": "32bit",
+      "scan_timestamp": "2026-10-22T14:27:30.314975+00:00",
+      "category": "Services & Drivers"
+    }
+  ]
+}

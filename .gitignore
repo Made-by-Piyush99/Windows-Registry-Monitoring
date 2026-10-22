@@ -1,0 +1,80 @@
+# ==============================================================================
+# Windows Registry Monitoring System - .gitignore
+# Created by: Piyush (MADE BY PIYUSH)
+# ==============================================================================
+
+# --- Python & Bytecode ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- PyInstaller & Build Outputs ---
+build/
+*.manifest
+# Uncomment below if you distribute binaries via GitHub Releases instead of Git:
+# dist/
+# *.exe
+
+# --- Runtime Machine-Specific & Sensitive Security Keys ---
+# CRITICAL: .security.dpapi is tied to the local machine's Windows DPAPI/TPM
+data/.security.dpapi
+
+# Local SQLite databases (created automatically on first launch)
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+*.db
+*.db-wal
+*.db-shm
+
+# Baseline backups and temporary files
+data/*.bak
+data/*.tmp
+*.tmp
+*.bak
+
+# --- Runtime Logs & Streaming Event Telemetry ---
+data/logs/*.log
+data/logs/*.log.*
+data/logs/*.jsonl
+data/logs/*.jsonl.*
+logs/
+*.log
+
+# --- Generated Runtime Export Reports (Keep sample files) ---
+data/reports/events_*.csv
+data/reports/summary_*.json
+data/reports/events_visual_*.png
+data/reports/advanced_file_analysis_*.csv
+data/reports/advanced_file_analysis_*.json
+data/reports/advanced_file_visual_*.png
+data/reports/visual_report_*.html
+
+# Preserve sample demo visual reports
+!data/reports/sample_*.png
+
+# --- OS & Editor Artifacts ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# VS Code & JetBrains
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- Testing & Coverage ---
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
