@@ -31,7 +31,7 @@ When submitting pull requests or making modifications, you must adhere to the **
 
 2. **Clone the Repository**:
    ```powershell
-   git clone https://github.com/<your-username>/Windows-Registry-Monitoring.git
+   git clone https://github.com/Made-by-Piyush99/Windows-Registry-Monitoring.git
    cd Windows-Registry-Monitoring
    ```
 

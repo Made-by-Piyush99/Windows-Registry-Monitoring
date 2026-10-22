@@ -8,12 +8,9 @@ echo                       Publisher: MADE BY PIYUSH
 echo ==============================================================================
 echo.
 
-set /p GITHUB_USER="Enter your GitHub Username (e.g. your-name): "
-if "%GITHUB_USER%"=="" (
-    echo [ERROR] GitHub username cannot be empty!
-    pause
-    exit /b 1
-)
+set GITHUB_USER=Made-by-Piyush99
+set /p USER_INPUT="Enter your GitHub Username [default: Made-by-Piyush99]: "
+if not "!USER_INPUT!"=="" set GITHUB_USER=!USER_INPUT!
 
 set REPO_NAME=Windows-Registry-Monitoring
 set REMOTE_URL=https://github.com/%GITHUB_USER%/%REPO_NAME%.git

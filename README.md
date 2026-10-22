@@ -187,7 +187,7 @@ Features of the installer:
 ### Option C: Run from Source
 Prerequisites: Python 3.10+ on Windows.
 ```cmd
-git clone https://github.com/your-username/Windows-Registry-Monitoring.git
+git clone https://github.com/Made-by-Piyush99/Windows-Registry-Monitoring.git
 cd Windows-Registry-Monitoring
 pip install -r requirements.txt
 python main.py
