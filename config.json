@@ -1,51 +1,102 @@
 {
-  "polling_interval_seconds": 5,
+  "polling_interval_seconds": 2,
   "monitored_paths": [
     {
       "category": "Startup - Current User",
       "paths": [
-        {"hive": "HKEY_CURRENT_USER", "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"},
-        {"hive": "HKEY_CURRENT_USER", "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce"}
+        {
+          "hive": "HKEY_CURRENT_USER",
+          "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+        },
+        {
+          "hive": "HKEY_CURRENT_USER",
+          "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce"
+        }
       ]
     },
     {
       "category": "Startup - Local Machine",
       "paths": [
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce"}
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce"
+        }
       ]
     },
     {
       "category": "Windows Defender",
       "paths": [
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Features"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows Defender"}
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SOFTWARE\\Microsoft\\Windows Defender\\Features"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows Defender"
+        }
       ]
     },
     {
       "category": "Windows Firewall",
       "paths": [
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\PublicProfile"}
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\PublicProfile"
+        }
       ]
     },
     {
       "category": "Security Policy & UAC",
       "paths": [
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Installer"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Control\\Lsa"}
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Installer"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SYSTEM\\CurrentControlSet\\Control\\Lsa"
+        }
       ]
     },
     {
       "category": "Services & Drivers",
       "paths": [
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\WinDefend"},
-        {"hive": "HKEY_LOCAL_MACHINE", "subkey": "SYSTEM\\CurrentControlSet\\Services\\mpssvc"}
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SYSTEM\\CurrentControlSet\\Services\\WinDefend"
+        },
+        {
+          "hive": "HKEY_LOCAL_MACHINE",
+          "subkey": "SYSTEM\\CurrentControlSet\\Services\\mpssvc"
+        }
       ]
     }
   ],

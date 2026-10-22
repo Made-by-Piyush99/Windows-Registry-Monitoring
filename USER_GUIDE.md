@@ -112,28 +112,28 @@ When launching the application for the very first time:
 
 ## 4. Master Interface Walkthrough
 
+![Windows Registry Monitor Dashboard](assets/dashboard_main.png)
+
+*Figure 1: Full Master Operations Dashboard showing Header Badges, Bento KPI Scorecards, Operations Ribbons, Live Telemetry Stream, and Forensic Artifact Inspector.*
+
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 🛡️ Windows Registry Monitoring System — ENTERPRISE EDITION                 [—] [口] [X]│
+│ 🛡️ WINDOWS REGISTRY MONITORING SYSTEM                                       [—] [口] [X]│
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ [● ENGINE STOPPED]  [⏱ 5s Polling]  [🔒 AES-256 DB]  [🕒 Last: Never]   [⚙️ App Settings]│
 ├────────────────────────────────────────────────────────────────────────────────────────┤
 │ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────────────┐ │
-│ │  STATUS:     │ │  BASELINE:   │ │  CHANGES:    │ │  SUSPICIOUS: │ │  SCAN ERRORS:  │ │
-│ │  MONITORING  │ │  1,420 Values│ │     12       │ │      2       │ │       0        │ │
+│ │SYSTEM STATUS │ │DETECTED      │ │SUSPICIOUS    │ │SCAN          │ │REGISTRY        │ │
+│ │STOPPED       │ │0 CHANGES     │ │0 FINDINGS    │ │0 EXCEPTIONS  │ │167 VALUES      │ │
 │ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └────────────────┘ │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ [▶ Start] [⏹ Stop] | [📋 Baseline] [🔄 Rescan] [🗑 Reset] | Ribbon 1: Engine Controls   │
-│ [📊 HTML Report] [📁 Export CSV] | [⚙️ Settings] [🪟 Widget] [👁 Hide] | Ribbon 2: Tools  │
+│ [▶ Start] [⏹ Stop] [🔄 Rescan] | [📋 Baseline] [🗑 Reset] | [🛡️ Remediate] [⚡ Clean All]│
+│ [🛡️ Adv Monitoring] [📊 Graphical] [📁 Export] [⚙️ Settings] [👻 Run in Background]   │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 🔍 Filter: [ Search registry path or binary...    ] [ALL] [CRITICAL] [SUSPICIOUS] [INFO]│
+│ Search: [                     ] Severity: [ All Severities ▼ ] [✕ Clear]   [Mute] [Hide]│
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ TIMESTAMP           SEVERITY      TYPE     REGISTRY PATH                 VALUE NAME    │
-│ 2026-10-22 19:45:10 SUSPICIOUS    ADDED    HKCU\...\CurrentVersion\Run   TestApp       │
-│ 2026-10-22 19:48:22 INVESTIGATION MODIFIED HKLM\...\Real-Time Protection DisableMon    │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 📑 [Event Summary]     | 🔬 [Static File Analysis]      | 💻 [Raw Payload & Hex]       │
-│ Path: HKCU\Software\Microsoft\Windows\CurrentVersion\Run                              │
-│ Command: C:\Windows\System32\cmd.exe /c powershell -enc ...                           │
-│ SHA-256: 8a4c9b... (Verified on disk: YES | Size: 289,280 bytes)                      │
+│ TIMESTAMP      SEVERITY      CHANGE TYPE   REGISTRY LOCATION      VALUE NAME   STATUS  │
+│ 2026-10-22 ... SUSPICIOUS    ADDED         HKCU\...\Run           TrojanKey    DETECTED│
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -186,11 +186,67 @@ Access the Settings Window by clicking **`⚙️ App Settings`** in Ribbon 2.
 ```
 
 ### Tab 1: Engine & Polling Timing
-- **Polling Interval (Seconds)**: Set between `1` and `300`. Recommended: `5` seconds for interactive workstations; `15` to `30` seconds for low-spec virtual machines or busy database servers.
-- **64-bit & 32-bit WOW64 Views**: Ensure both are checked to prevent 32-bit malware from hiding under `Software\WOW6432Node`.
-- **File Analysis Switches**: Enable or disable dynamic path parsing and SHA-256 chunked hashing.
 
-### Tab 2: Appearance & Cyber Themes
+![Continuous Registry Polling Interval Settings](assets/polling_settings.png)
+
+*Figure 2: Continuous Registry Polling Interval configuration with 6 selectable frequencies and dedicated Save button.*
+
+The engine supports 6 dedicated polling speeds to suit any operational profile:
+- **1 Second (⚡ Real-time ultra high frequency)**: Ideal for malware analysis sandboxes and active breach investigations where immediate detection is required.
+- **2 Seconds (🚀 Fast telemetry auditing)**: Rapid threat hunting on high-performance analyst workstations.
+- **5 Seconds (🛡️ Recommended standard balance)**: The optimal balance between instant alert velocity and near-zero CPU consumption.
+- **10 Seconds (⏳ Low overhead monitoring)**: Minimal footprint monitoring for everyday office PCs.
+- **30 Seconds (💤 Passive background auditing)**: Ultra-lightweight cadence for background auditing without battery drain on laptops.
+- **60 Seconds (🍃 Stealth low-resource mode)**: Silent long-term surveillance mode for servers and virtual machines.
+
+#### How to Save & Apply Timing:
+1. Open **⚙️ App Settings** and stay on the **Engine & Timing** tab.
+2. Click any of the 6 timing cards (or select its radio button).
+3. Click the green **"💾 Save & Apply Timing Now"** button directly inside the tab.
+4. The background monitoring thread immediately switches to the new polling speed without stopping or restarting!
+5. **Quick Header Switch**: You can also click directly on the **`⏱️ 5s Polling`** badge in the top-right header of the main window to open a quick-switch popup menu!
+
+---
+
+## 6. Active Threat Remediation & Registry Deletion
+
+When the monitoring engine flags an event with **Suspicious** or **Investigation Required** severity (such as an unauthorized startup trojan, ransomware disablement of Windows Defender, or an encoded PowerShell LOLBin), you can neutralize the threat directly from the application:
+
+```
+[ THREAT DETECTED ] ──▶ [ SELECT ROW ] ──▶ Click "🛡️ Remediate Threat"
+                                                  │
+                                                  ▼
+                                       [ CONFIRMATION DIALOG ]
+                                       Shows Hive, Subkey, Value & PE binary
+                                                  │
+                                                  ▼ [Confirm Delete]
+                                       [ ATOMIC WIN32 REGISTRY DELETION ]
+                                                  │
+                                                  ▼
+                                       • Status updated to "REMEDIATED" (Green)
+                                       • Suspicious count decremented
+                                       • Audit logged in AES-256 local database
+```
+
+### Method 1: Single-Threat Remediation
+1. In the **Live Telemetry Event Stream** table, click on the row you wish to remediate.
+2. Click **`🛡️ Remediate Threat`** in the Operations Toolbar (or right-click the row and select **"🛡️ Remediate & Delete Registry Entry"**).
+3. Review the **Threat Remediation Warning Dialog**:
+   - Inspects the Hive, Subkey path, Value Name, Command Data, and on-disk PE binary path.
+4. Click **`🗑️ Confirm & Delete Registry Value`**.
+5. The system invokes native Windows API `winreg.DeleteValue` with elevated privileges.
+6. The entry in your telemetry table updates to **`REMEDIATED`** with an emerald green highlight, and your **SUSPICIOUS FINDINGS** counter decrements automatically!
+
+### Method 2: Batch Auto-Clean All Threats
+If multiple malicious keys were dropped during a malware attack:
+1. Click **`⚡ Auto-Clean Threats`** in Ribbon 1.
+2. The system scans all active un-remediated suspicious events and displays a confirmation summary of all targeted registry values.
+3. Click **"Yes"** to execute batch deletion across all flagged registry keys.
+4. All threats are neutralized simultaneously, and a complete remediation log is stored in your local encrypted SQLite database!
+
+---
+
+## 7. Desktop Widget & Background Stealth Modes
 Select between five hand-crafted cyber themes:
 - **Cyber Blue Team (Default)**: Optimized for all-day SOC monitoring.
 - **Obsidian Stealth**: Ultra-dark OLED palette for low-light environments.

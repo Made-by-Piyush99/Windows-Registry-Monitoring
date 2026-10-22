@@ -6,22 +6,48 @@ A defensive, read-only Windows Registry auditing and forensics tool built with P
 
 ---
 
-## What's New in v2.0 (App Settings, Security Encryption & Themes)
+## What's New in v2.4 (Threat Remediation, UI Showcase & Timing Controls)
 
-- ⚙️ **Comprehensive App Settings Dialog**: Spacious, tabbed configuration dialog for polling rates, 64-bit / 32-bit registry bitness, and alerting thresholds.
-- 🎨 **Multi-Theme Engine**: 5 cybersecurity themes (Cyber Blue Team, Obsidian Stealth, Matrix Terminal, Crimson Alert, Nordic Frost) with live preview and instant application.
-- ⏱️ **Live Polling Rate Adjustment**: Adjust engine frequency on the fly (1s, 2s, 5s, 10s, 30s, 60s) with real-time UI status reflection.
-- 🚀 **Windows Auto-Start on PC Boot**: One-click registration in `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` with silent `--minimized` boot support.
-- 🔒 **Local Encrypted SQLite3 Database**:
-  - Telemetry, baselines, and scan histories encrypted using **AES-256 (Fernet)**.
-  - Encryption keys secured via **Windows DPAPI** (`crypt32.dll` `CryptProtectData`/`CryptUnprotectData`), hardware-bound to the logged-in Windows user.
-  - Zero external snooping: external applications or unauthorized users cannot inspect stored registry changes.
-  - Integrated SQLite WAL journal mode, VACUUM defragmentation, and decrypted JSON audit export.
-- 🖥️ **De-cluttered, Spacious Layout**:
-  - 5 KPI scorecards with colored top accent bars and generous padding.
-  - Split Operations Toolbar: Segmented into Engine Ribbon and Forensics/Settings Ribbon to eliminate horizontal overcrowding.
-  - 3-Tab Telemetry Inspector (Values & Diff, File Forensics & SHA-256, Encrypted Database Management).
-- 📦 **Single-File Standalone Executable & Inno Setup 7 Installer**: Built for zero-dependency deployment on any modern Windows 10/11 system.
+- 🛡️ **Active Threat Remediation & Deletion**:
+  - Manually or automatically neutralize detected viruses, trojans, and suspicious persistence keys.
+  - Safe, controlled Windows Registry API value deletion (`winreg.DeleteValue`) with Administrator verification.
+  - One-click **"🛡️ Remediate Threat"** and **"⚡ Auto-Clean Threats"** batch remediation.
+  - Complete cryptographic remediation audit history preserved in the local encrypted database.
+- ⏱️ **Flexible Polling Frequency (1s to 60s)**:
+  - 6 selectable engine cadences: 1s, 2s, 5s, 10s, 30s, and 60s.
+  - Dedicated **"💾 Save Timing & Apply Immediately"** button inside App Settings.
+  - Header quick-switch badge: click on `⏱️ 5s Polling` in the top right to instantly change polling intervals on the fly!
+- 🖼️ **Ergonomic Visual Experience & Theme Engine**:
+  - 5 cybersecurity visual profiles (Cyber Blue Team, Obsidian Stealth, Matrix Terminal, Crimson Alert, Nordic Frost).
+  - 5 live Bento KPI scorecards, split operations ribbon, and multi-tab forensic inspector.
+- 🔒 **Hardware-Bound AES-256 Storage**:
+  - Telemetry and remediation records secured by Windows DPAPI tied to user SID and TPM 2.0.
+
+---
+
+## 🖼️ Application Interface & Settings Showcase
+
+### 1. Operations & Defensive Telemetry Dashboard
+![Windows Registry Monitoring System Dashboard](assets/dashboard_main.png)
+
+### 2. Continuous Polling Interval Configuration (1s to 60s)
+![Continuous Registry Polling Interval Settings](assets/polling_settings.png)
+
+---
+
+## 💻 Language & Technology Stack
+
+The system is constructed using a high-performance, native Windows defensive stack:
+
+| Layer | Component & Technology | Purpose |
+| :--- | :--- | :--- |
+| **Core Runtime** | **Python 3.12 / 3.14 (64-bit CPython)** | High-level orchestration, asynchronous threading, and telemetry pipeline. |
+| **OS Interfaces** | **Native Win32 API (`winreg`, `advapi32.dll`, `ctypes`)** | Deep registry enumeration across 64-bit and 32-bit WOW64 nodes, atomic deletion. |
+| **Cryptography** | **AES-256 (Fernet) + Windows DPAPI (`crypt32.dll`)** | Authenticated record encryption bound to user SID and motherboard TPM 2.0. |
+| **Storage Engine** | **SQLite 3 (WAL Journal Mode)** | High-concurrency local database with VACUUM optimization and zero external dependencies. |
+| **GUI Framework** | **Tkinter & Ttk Styling Engine** | High-contrast, zero-lag 60fps dark user interface with 23 dynamic theme tokens. |
+| **Static Analytics** | **Chunked SHA-256 & Command Parser** | Zero-execution static PE binary resolution and unquoted path traversal verification. |
+| **Packaging** | **PyInstaller 6.x & Inno Setup 7** | Standalone single-file binary (80 MB) and professional Windows wizard setup installer. |
 
 ---
 

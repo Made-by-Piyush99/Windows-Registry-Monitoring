@@ -223,7 +223,31 @@ class AppSettingsWindow(tk.Toplevel):
                 font=("Segoe UI", 9, "bold")
             )
             rb.pack(anchor="w")
-            tk.Label(card, text=desc, font=("Segoe UI", 8), fg=FG_MUTED, bg="#0f172a").pack(anchor="w", padx=(22, 0))
+            lbl_desc = tk.Label(card, text=desc, font=("Segoe UI", 8), fg=FG_MUTED, bg="#0f172a")
+            lbl_desc.pack(anchor="w", padx=(22, 0))
+
+            def make_selector(v):
+                return lambda e: self.var_polling.set(v)
+            card.bind("<Button-1>", make_selector(val))
+            lbl_desc.bind("<Button-1>", make_selector(val))
+
+        # Quick Save Timing Button directly in Tab 1
+        timing_action_row = tk.Frame(parent, bg=CARD_BG)
+        timing_action_row.pack(fill=tk.X, pady=(0, 16))
+
+        self.btn_save_timing = tk.Button(
+            timing_action_row, text="💾 Save & Apply Timing Now",
+            bg="#059669", fg="#ffffff", activebackground="#047857", activeforeground="#ffffff",
+            font=("Segoe UI", 9, "bold"), padx=14, pady=6, bd=0, relief=tk.FLAT, cursor="hand2",
+            command=self._save_and_apply
+        )
+        self.btn_save_timing.pack(side=tk.LEFT)
+
+        self.lbl_timing_status = tk.Label(
+            timing_action_row, text="✓ Select preferred frequency above and click Save",
+            font=("Segoe UI", 8), fg="#10b981", bg=CARD_BG
+        )
+        self.lbl_timing_status.pack(side=tk.LEFT, padx=(10, 0))
 
         # Architecture & Bitness
         tk.Label(

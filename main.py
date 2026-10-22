@@ -1165,6 +1165,9 @@ class RegistryMonitorApp:
         style.configure("Red.TButton", background="#b91c1c", foreground="#ffffff", bordercolor="#ef4444", borderwidth=1, focusthickness=0, font=("Segoe UI", 9, "bold"))
         style.map("Red.TButton", background=[("active", "#991b1b"), ("disabled", "#1e293b")], foreground=[("disabled", "#64748b")])
 
+        style.configure("Orange.TButton", background="#c2410c", foreground="#ffffff", bordercolor="#f97316", borderwidth=1, focusthickness=0, font=("Segoe UI", 9, "bold"))
+        style.map("Orange.TButton", background=[("active", "#ea580c"), ("disabled", "#1e293b")], foreground=[("disabled", "#64748b")])
+
         style.configure("Cyan.TButton", background="#0369a1", foreground="#ffffff", bordercolor=ACCENT, borderwidth=1, focusthickness=0, font=("Segoe UI", 9, "bold"))
         style.map("Cyan.TButton", background=[("active", "#0284c7")])
 
@@ -1240,9 +1243,10 @@ class RegistryMonitorApp:
         poll_s = self.config.get("polling_interval_seconds", 5)
         self.header_polling_badge = tk.Label(
             header_right, text=f"⏱ {poll_s}s Polling", bg="#1e293b", fg=FG_MUTED,
-            font=("Segoe UI", 8, "bold"), padx=8, pady=3
+            font=("Segoe UI", 8, "bold"), padx=8, pady=3, cursor="hand2"
         )
         self.header_polling_badge.pack(side=tk.LEFT, padx=3)
+        self.header_polling_badge.bind("<Button-1>", self._show_quick_polling_menu)
 
         self.header_db_badge = tk.Label(
             header_right, text="🔒 AES-256 DB", bg="#064e3b", fg="#34d399",
@@ -1362,6 +1366,20 @@ class RegistryMonitorApp:
         self.btn_reset = ttk.Button(left_ribbon, text="🗑 Reset Baseline", style="Dark.TButton", command=self._reset_baseline)
         self.btn_reset.pack(side=tk.LEFT, padx=3)
 
+        ttk.Separator(left_ribbon, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=6)
+
+        self.btn_remediate = ttk.Button(
+            left_ribbon, text="🛡️ Remediate Threat", style="Red.TButton",
+            command=self._remediate_selected_threat
+        )
+        self.btn_remediate.pack(side=tk.LEFT, padx=3)
+
+        self.btn_auto_clean = ttk.Button(
+            left_ribbon, text="⚡ Auto-Clean Threats", style="Orange.TButton",
+            command=self._auto_clean_all_threats
+        )
+        self.btn_auto_clean.pack(side=tk.LEFT, padx=3)
+
         # Right Ribbon: Forensics, Intelligence & Settings
         right_ribbon = tk.Frame(btn_row, bg=CARD_BG)
         right_ribbon.pack(side=tk.RIGHT, fill=tk.Y)
@@ -1466,6 +1484,7 @@ class RegistryMonitorApp:
         # Bind events for details
         self.event_tree.bind("<Double-1>", self._show_event_details)
         self.event_tree.bind("<<TreeviewSelect>>", self._show_event_details)
+        self.event_tree.bind("<Button-3>", self._show_tree_context_menu)
 
         # Tag configurations for colors
         self._refresh_tree_tags()
@@ -1533,6 +1552,18 @@ class RegistryMonitorApp:
         tk.Label(r_frame, text="Reason:", bg=CARD_BG, fg=FG_MUTED, font=("Segoe UI", 8, "bold"), width=7, anchor="w").pack(side=tk.LEFT)
         self.insp_reason_val = tk.Label(r_frame, text="Select an event from the telemetry stream above.", bg=CARD_BG, fg="#fde047", font=("Segoe UI", 8), anchor="w", wraplength=480, justify="left")
         self.insp_reason_val.pack(side=tk.LEFT)
+
+        act_frame = tk.Frame(left_card, bg=CARD_BG)
+        act_frame.pack(fill=tk.X, pady=(6, 0))
+        self._themed_card_frames.append(act_frame)
+
+        self.btn_insp_remediate = tk.Button(
+            act_frame, text="🗑️ Neutralize & Delete Registry Threat",
+            bg="#dc2626", fg="#ffffff", activebackground="#b91c1c", activeforeground="#ffffff",
+            font=("Segoe UI", 8, "bold"), bd=0, padx=8, pady=4, cursor="hand2",
+            command=self._remediate_selected_threat
+        )
+        self.btn_insp_remediate.pack(side=tk.LEFT)
 
         # Right Card: Binary & Artifact Telemetry
         right_card = tk.Frame(tab_cards, bg=CARD_BG, bd=1, relief=tk.SOLID, highlightbackground=BORDER, highlightthickness=1, padx=10, pady=6)
@@ -1779,6 +1810,7 @@ class RegistryMonitorApp:
         self.event_tree.tag_configure("suspicious", background="#2a1f0a", foreground="#fbbf24")
         self.event_tree.tag_configure("investigation_required", background="#381111", foreground="#f87171")
         self.event_tree.tag_configure("error", background="#2d1126", foreground="#f472b6")
+        self.event_tree.tag_configure("remediated", background="#064e3b", foreground="#6ee7b7")
         self.event_tree.tag_configure("informational", background=theme["tree_bg"], foreground=theme["fg_secondary"])
         self.event_tree.tag_configure("even", background=theme["tree_bg"])
         self.event_tree.tag_configure("odd", background="#131d33" if theme["name"] == "Cyber Blue Team" else theme["card_bg"])
@@ -1892,6 +1924,302 @@ class RegistryMonitorApp:
 
     def _copy_selected_full_telemetry(self):
         self._copy_to_clipboard(self.selected_event_full_text, "Full Event Telemetry")
+
+    def _copy_selected_value_name(self):
+        val = getattr(self, "selected_event_name", "")
+        self._copy_to_clipboard(val, "Registry Value Name")
+
+    def _show_quick_polling_menu(self, event=None):
+        """Show quick timing interval popup menu when clicking header badge."""
+        menu = tk.Menu(self.root, tearoff=0, bg=self.theme["card_bg"], fg=self.theme["fg"], activebackground=self.theme["accent"])
+        intervals = [
+            (1, "⚡ 1s - Ultra High Frequency"),
+            (2, "🚀 2s - Fast Telemetry Auditing"),
+            (5, "🛡️ 5s - Recommended Standard"),
+            (10, "⏳ 10s - Low Overhead Monitoring"),
+            (30, "💤 30s - Passive Auditing"),
+            (60, "🍃 60s - Stealth Mode"),
+        ]
+        curr = self.config.get("polling_interval_seconds", 5)
+        for s, label in intervals:
+            prefix = "✓ " if s == curr else "   "
+            menu.add_command(label=f"{prefix}{label}", command=lambda sec=s: self._set_polling_interval(sec))
+        
+        try:
+            x = self.header_polling_badge.winfo_rootx()
+            y = self.header_polling_badge.winfo_rooty() + self.header_polling_badge.winfo_height() + 2
+            menu.tk_popup(x, y)
+        except Exception as e:
+            logger.debug("Quick polling menu error: %s", e)
+
+    def _set_polling_interval(self, seconds: int):
+        """Apply new polling interval immediately and persist to config and database."""
+        self.config["polling_interval_seconds"] = seconds
+        if self.monitoring_thread and self.monitoring_thread.is_alive():
+            self.monitoring_thread.update_interval(seconds)
+        if hasattr(self, "header_polling_badge"):
+            self.header_polling_badge.configure(text=f"⏱ {seconds}s Polling")
+        # Save to config.json
+        try:
+            with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+                json.dump(self.config, f, indent=2)
+            logger.info("Polling interval updated to %ds and saved to config.json", seconds)
+        except Exception as e:
+            logger.debug("Failed to write config: %s", e)
+        # Save to encrypted SQLite database
+        if hasattr(self, "db") and self.db:
+            self.db.save_setting("polling_interval_seconds", seconds)
+        self._set_statusbar(f"✓ Polling interval set to {seconds}s and applied to monitoring engine.")
+
+    def _parse_hive_subkey(self, full_path: str) -> tuple[str, str]:
+        """Extract hive and subkey from full registry path."""
+        if not full_path:
+            return "", ""
+        parts = full_path.split("\\", 1)
+        if len(parts) == 2:
+            return parts[0], parts[1]
+        return parts[0], ""
+
+    def _get_selected_event(self) -> dict | None:
+        """Retrieve full event object for the currently selected Treeview item."""
+        selection = self.event_tree.selection()
+        if not selection:
+            return None
+        item = selection[0]
+        values = self.event_tree.item(item, "values")
+        if not values:
+            return None
+        timestamp_str = str(values[0])
+        reg_path = str(values[3])
+        val_name = str(values[4])
+
+        for evt in reversed(self.events):
+            evt_ts = evt.get("timestamp", "")
+            try:
+                dt = datetime.fromisoformat(evt_ts)
+                evt_ts_str = dt.strftime("%Y-%m-%d %H:%M:%S")
+            except (ValueError, TypeError):
+                evt_ts_str = str(evt_ts)
+            if (evt_ts_str == timestamp_str and
+                evt.get("full_path") == reg_path and
+                evt.get("value_name") == val_name):
+                return evt
+        return {
+            "timestamp": values[0],
+            "severity": values[1].lower() if len(values) > 1 else "informational",
+            "change_type": values[2] if len(values) > 2 else "UNKNOWN",
+            "full_path": reg_path,
+            "value_name": val_name,
+            "status": values[6] if len(values) > 6 else "detected"
+        }
+
+    def _remediate_selected_threat(self):
+        """Manually neutralize and delete a suspicious or malicious registry value."""
+        event = self._get_selected_event()
+        if not event:
+            suspicious_events = [
+                e for e in reversed(self.events)
+                if e.get("severity") in ("suspicious", "investigation_required")
+                and e.get("status") != "REMEDIATED"
+            ]
+            if suspicious_events:
+                event = suspicious_events[0]
+            else:
+                messagebox.showinfo(
+                    "Threat Remediation",
+                    "Please select an event from the telemetry table to remediate.\n\n"
+                    "Tip: Select an entry with 'Suspicious' or 'Investigation' severity.",
+                    parent=self.root
+                )
+                return
+
+        value_name = event.get("value_name", "")
+        full_path = event.get("full_path", "")
+        if value_name in ("(key-level)", ""):
+            messagebox.showwarning(
+                "Remediation Notice",
+                "This event represents a key-level or access permission change.\n"
+                "Individual value deletion cannot be performed on key-level events.",
+                parent=self.root
+            )
+            return
+
+        if event.get("status") == "REMEDIATED":
+            messagebox.showinfo(
+                "Already Neutralized",
+                f"Registry entry '{value_name}' has already been remediated.",
+                parent=self.root
+            )
+            return
+
+        hive, subkey = self._parse_hive_subkey(full_path)
+        view = event.get("view", "64bit")
+        current_val = event.get("current_value", "N/A")
+        reason = event.get("reason", "Suspicious modification detected")
+        resolved = event.get("resolved_file") or {}
+        cmd_info = resolved.get("command_info") or {}
+        exe_path = cmd_info.get("executable_path", "N/A")
+
+        confirm_msg = (
+            f"⚠️ THREAT REMEDIATION & DELETION WARNING\n\n"
+            f"Target Registry Location:\n{full_path}\n\n"
+            f"Value Name:  {value_name}\n"
+            f"Value Data:  {str(current_val)[:80]}\n"
+            f"Referenced:  {exe_path}\n"
+            f"Severity:    {str(event.get('severity', 'UNKNOWN')).upper()}\n"
+            f"Reason:      {reason}\n\n"
+            f"Action: This will PERMANENTLY DELETE this registry value using the\n"
+            f"Windows Registry API to neutralize attacker persistence.\n\n"
+            f"Are you sure you want to delete this registry value now?"
+        )
+
+        if not messagebox.askyesno("Confirm Threat Remediation", confirm_msg, icon="warning", parent=self.root):
+            return
+
+        success, msg = registry_scanner.delete_registry_value(hive, subkey, value_name, view)
+        
+        if hasattr(self, "db") and self.db:
+            try:
+                self.db.record_remediation(
+                    event_id=event.get("event_id", ""),
+                    full_path=full_path,
+                    value_name=value_name,
+                    action="MANUAL_DELETE",
+                    result="SUCCESS" if success else "FAILED",
+                    details={"reason": reason, "current_val": current_val, "exe_path": exe_path, "message": msg}
+                )
+            except Exception as e:
+                logger.debug("Failed to record remediation: %s", e)
+
+        if success:
+            event["status"] = "REMEDIATED"
+            if event.get("severity") in ("suspicious", "investigation_required"):
+                self.suspicious_count = max(0, self.suspicious_count - 1)
+            
+            self._update_event_row_status(event, "REMEDIATED")
+            self._update_status_display()
+            self._set_statusbar(f"✓ Threat Neutralized: Deleted '{value_name}' from {full_path}")
+            
+            messagebox.showinfo(
+                "Threat Neutralized",
+                f"✓ Success!\n\n{msg}\n\nThreat persistence has been eliminated.",
+                parent=self.root
+            )
+        else:
+            messagebox.showerror(
+                "Remediation Failed",
+                f"Failed to delete registry value:\n\n{msg}\n\n"
+                "Tip: Ensure the application is running with Administrator privileges.",
+                parent=self.root
+            )
+
+    def _auto_clean_all_threats(self):
+        """Batch neutralize all detected suspicious registry threats."""
+        active_threats = [
+            e for e in self.events
+            if e.get("severity") in ("suspicious", "investigation_required")
+            and e.get("status") != "REMEDIATED"
+            and e.get("value_name") not in ("(key-level)", "")
+        ]
+
+        if not active_threats:
+            messagebox.showinfo(
+                "Clean System",
+                "✓ No active suspicious or threat entries found to clean!\n\n"
+                "Your monitored registry locations are clean.",
+                parent=self.root
+            )
+            return
+
+        threat_summary = "\n".join([
+            f"• [{e.get('value_name')}] in {e.get('full_path')}"
+            for e in active_threats[:8]
+        ])
+        if len(active_threats) > 8:
+            threat_summary += f"\n...and {len(active_threats) - 8} more"
+
+        confirm_msg = (
+            f"⚠️ BATCH THREAT REMEDIATION\n\n"
+            f"Found {len(active_threats)} active threat/suspicious entries:\n\n"
+            f"{threat_summary}\n\n"
+            f"Action: This will attempt to delete all {len(active_threats)} entries from the\n"
+            f"Windows Registry to remove malicious autostart hooks.\n\n"
+            f"Do you want to proceed with batch remediation?"
+        )
+
+        if not messagebox.askyesno("Confirm Batch Threat Cleaning", confirm_msg, icon="warning", parent=self.root):
+            return
+
+        remediated_count = 0
+        failed_count = 0
+
+        for event in active_threats:
+            full_path = event.get("full_path", "")
+            value_name = event.get("value_name", "")
+            hive, subkey = self._parse_hive_subkey(full_path)
+            view = event.get("view", "64bit")
+
+            success, msg = registry_scanner.delete_registry_value(hive, subkey, value_name, view)
+            if hasattr(self, "db") and self.db:
+                try:
+                    self.db.record_remediation(
+                        event_id=event.get("event_id", ""),
+                        full_path=full_path,
+                        value_name=value_name,
+                        action="BATCH_CLEAN",
+                        result="SUCCESS" if success else "FAILED",
+                        details={"message": msg}
+                    )
+                except Exception as e:
+                    logger.debug("Failed to record batch remediation: %s", e)
+
+            if success:
+                event["status"] = "REMEDIATED"
+                self._update_event_row_status(event, "REMEDIATED")
+                remediated_count += 1
+            else:
+                failed_count += 1
+
+        self.suspicious_count = max(0, self.suspicious_count - remediated_count)
+        self._update_status_display()
+        self._set_statusbar(f"Batch remediation complete: {remediated_count} neutralized, {failed_count} failed.")
+
+        messagebox.showinfo(
+            "Batch Cleaning Complete",
+            f"Remediation Summary:\n\n"
+            f"✓ Neutralized: {remediated_count} threat entries\n"
+            f"✗ Failed / Denied: {failed_count} entries\n\n"
+            "All actions logged to encrypted database.",
+            parent=self.root
+        )
+
+    def _update_event_row_status(self, event: dict, new_status: str):
+        """Update the displayed status column in the event tree for a given event."""
+        target_path = event.get("full_path")
+        target_val = event.get("value_name")
+
+        for item in self.event_tree.get_children():
+            values = list(self.event_tree.item(item, "values"))
+            if len(values) >= 7 and values[3] == target_path and values[4] == target_val:
+                values[6] = new_status
+                self.event_tree.item(item, values=values, tags=("remediated",))
+                break
+
+    def _show_tree_context_menu(self, event):
+        """Show contextual right-click menu for selected event in event tree."""
+        item = self.event_tree.identify_row(event.y)
+        if item:
+            self.event_tree.selection_set(item)
+            self._show_event_details()
+            
+            menu = tk.Menu(self.root, tearoff=0, bg=self.theme["card_bg"], fg=self.theme["fg"], activebackground=self.theme["accent"])
+            menu.add_command(label="🛡️ Remediate & Delete Registry Entry", command=self._remediate_selected_threat)
+            menu.add_command(label="⚡ Auto-Clean All Threats", command=self._auto_clean_all_threats)
+            menu.add_separator()
+            menu.add_command(label="📋 Copy Registry Path", command=self._copy_selected_path)
+            menu.add_command(label="📋 Copy Value Name", command=self._copy_selected_value_name)
+            menu.add_command(label="📋 Copy SHA-256 Hash", command=self._copy_selected_sha)
+            menu.tk_popup(event.x_root, event.y_root)
 
     def _matches_filter(self, event: dict) -> bool:
         """Check if an event matches current severity filter and search term."""

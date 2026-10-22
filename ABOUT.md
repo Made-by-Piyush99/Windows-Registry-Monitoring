@@ -74,25 +74,43 @@ Analyst fatigue is a primary factor in SOC missed alerts. The UI includes 5 prof
 5. **Nordic Frost**: Polar arctic blue `#5EEAD4` with frosted glacial steel `#0F172A`.
 
 ### 🖥️ 5. Ergonomic Bento Dashboard & Split Ribbon Controls
+
+![Windows Registry Monitor Dashboard](assets/dashboard_main.png)
+
 - **Bento KPI Scorecards**: 5 prominent live metric cards:
-  - 🔄 Engine Status & Polling Cadence
+  - 🔄 Engine Status & Polling Cadence (1s to 60s)
   - 📋 Baseline Integrity & Tracked Values
   - 📊 Total Events Captured
   - ⚠️ Suspicious / Investigation Alerts
   - ⚡ Active Scan Performance & Errors
 - **Dual-Ribbon Operations Toolbar**:
-  - *Engine Controls*: Start Monitoring, Stop Monitoring, Create Baseline, Rescan, Reset Baseline.
+  - *Engine Controls*: Start Monitoring, Stop Monitoring, Create Baseline, Rescan, Reset Baseline, **Remediate Threat**, **Auto-Clean Threats**.
   - *Investigative Tools*: Visual HTML Report, CSV Export, Settings Dialog, Mute Popups, Floating Widget, Hide to Tray.
 - **Search & Quick-Filter Ribbon**: Real-time substring search across registry paths and binary payloads with instantaneous severity filter chips (`All`, `Investigation`, `Suspicious`, `Informational`, `Errors`).
 
-### 🪟 6. Draggable Floating Desktop Widget
+### 🛡️ 6. Active Threat Remediation & Deletion Engine
+- Allows security operators to safely delete malicious registry keys directly from the application.
+- Uses Windows Registry API (`winreg.DeleteValue`) with privilege verification.
+- Context menu integration: right-click any event row to instantly neutralize persistence.
+- Complete remediation audit ledger stored in local encrypted database.
+
+### ⏱️ 7. Dynamic Continuous Polling Engine (1s to 60s)
+
+![Continuous Registry Polling Interval Settings](assets/polling_settings.png)
+
+- 6 dedicated polling speeds: 1s, 2s, 5s, 10s, 30s, and 60s.
+- Real-time engine adjustment: changes take effect immediately without restarting the app.
+- Dedicated "💾 Save & Apply Timing Now" button inside App Settings.
+- One-click quick-switch popup menu from the main dashboard header badge.
+
+### 🪟 8. Draggable Floating Desktop Widget
 - Minimizes the monitoring footprint into a sleek, unobtrusive floating HUD on your desktop.
 - Displays live engine status, real-time event counts, and pulse animations.
 - Fully draggable with `always-on-top` pinning.
 - Hides the main dashboard from the Windows taskbar (`withdraw` + `toolwindow`), keeping analyst multi-monitor screens clear.
 - Single double-click restores the full desktop dashboard instantly.
 
-### 📈 7. Automated Visual Analytics & HTML Reports
+### 📈 9. Automated Visual Analytics & HTML Reports
 - Generates publication-ready standalone HTML reports (`reports/visual_report_<timestamp>.html`).
 - Embedded interactive **Chart.js 4.4** visualizations:
   - Severity Breakdown Doughnut Chart

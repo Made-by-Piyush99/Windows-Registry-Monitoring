@@ -193,6 +193,20 @@ class EncryptedDatabaseManager:
                     changes_found INTEGER
                 );
             """)
+
+            # Threat remediations table
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS remediations (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    timestamp TEXT NOT NULL,
+                    event_id TEXT,
+                    full_path TEXT,
+                    value_name TEXT,
+                    action TEXT NOT NULL,
+                    result TEXT NOT NULL,
+                    encrypted_details BLOB
+                );
+            """)
             conn.commit()
 
     def save_event(self, event: dict) -> bool:
@@ -334,6 +348,46 @@ class EncryptedDatabaseManager:
             logger.debug("Failed to retrieve setting %s: %s", key, e)
         return default
 
+    def record_remediation(self, event_id: str, full_path: str, value_name: str,
+                           action: str, result: str, details: dict | None = None) -> bool:
+        """Record a threat remediation / registry deletion action into encrypted database."""
+        try:
+            now = datetime.now(timezone.utc).isoformat()
+            encrypted_details = self.encrypt_payload(details or {}) if details else None
+            with self._get_connection() as conn:
+                conn.execute("""
+                    INSERT INTO remediations (
+                        timestamp, event_id, full_path, value_name, action, result, encrypted_details
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, (now, event_id, full_path, value_name, action, result, encrypted_details))
+                conn.commit()
+            logger.info("Remediation recorded in database: %s [%s] -> %s", full_path, value_name, result)
+            return True
+        except Exception as e:
+            logger.error("Failed to record remediation: %s", e)
+            return False
+
+    def get_remediations(self, limit: int = 100) -> list[dict]:
+        """Retrieve recent remediation actions."""
+        remediations = []
+        try:
+            with self._get_connection() as conn:
+                cursor = conn.execute("""
+                    SELECT id, timestamp, event_id, full_path, value_name, action, result, encrypted_details
+                    FROM remediations ORDER BY timestamp DESC LIMIT ?
+                """, (limit,))
+                for row in cursor.fetchall():
+                    item = dict(row)
+                    if item.get("encrypted_details"):
+                        try:
+                            item["details"] = self.decrypt_payload(item["encrypted_details"])
+                        except Exception:
+                            item["details"] = {}
+                    remediations.append(item)
+        except Exception as e:
+            logger.debug("Failed to retrieve remediations: %s", e)
+        return remediations
+
     def get_db_stats(self) -> dict:
         """Get summary statistics of the encrypted database."""
         stats = {
@@ -342,6 +396,7 @@ class EncryptedDatabaseManager:
             "total_events": 0,
             "total_baselines": 0,
             "total_scans": 0,
+            "total_remediations": 0,
             "encryption_algorithm": "AES-256 (Fernet) + Windows DPAPI",
             "is_encrypted": True,
         }
@@ -352,6 +407,7 @@ class EncryptedDatabaseManager:
                 stats["total_events"] = conn.execute("SELECT COUNT(*) FROM events").fetchone()[0]
                 stats["total_baselines"] = conn.execute("SELECT COUNT(*) FROM baselines").fetchone()[0]
                 stats["total_scans"] = conn.execute("SELECT COUNT(*) FROM scan_history").fetchone()[0]
+                stats["total_remediations"] = conn.execute("SELECT COUNT(*) FROM remediations").fetchone()[0]
         except Exception as e:
             logger.debug("Failed to get db stats: %s", e)
         return stats

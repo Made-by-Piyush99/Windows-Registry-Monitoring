@@ -362,6 +362,92 @@ class TestMainAppIntegration(unittest.TestCase):
         found = any(e.get("event_id") == "test-int-evt-999" for e in db_events)
         self.assertTrue(found, "Event was not persisted into encrypted SQLite database")
 
+    def test_record_and_get_remediations(self):
+        """Verify remediation actions are stored in encrypted database."""
+        success = self.app.db.record_remediation(
+            event_id="rem-test-001",
+            full_path="HKCU\\Software\\TestKey",
+            value_name="BadTrojan",
+            action="MANUAL_DELETE",
+            result="SUCCESS",
+            details={"reason": "Suspicious powershell", "current_val": "malware.exe"}
+        )
+        self.assertTrue(success)
+        remediations = self.app.db.get_remediations(limit=10)
+        self.assertTrue(any(r["value_name"] == "BadTrojan" for r in remediations))
+        self.assertEqual(remediations[0]["result"], "SUCCESS")
+
+    def test_set_polling_interval_updates_thread_and_badge(self):
+        """Verify dynamic polling interval change updates badge, config and database."""
+        self.app._set_polling_interval(2)
+        self.assertEqual(self.app.config["polling_interval_seconds"], 2)
+        self.assertIn("2s Polling", self.app.header_polling_badge.cget("text"))
+
+        # Verify saved in encrypted database
+        saved_interval = self.app.db.get_setting("polling_interval_seconds")
+        self.assertEqual(saved_interval, 2)
+
+    def test_remediate_selected_threat_logic(self):
+        """Verify threat remediation deletes value and updates event status to REMEDIATED."""
+        event = {
+            "event_id": "threat-test-888",
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "change_type": "ADDED",
+            "severity": "suspicious",
+            "full_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+            "value_name": "RansomwarePersistence",
+            "current_value": "powershell.exe -enc XYZ",
+            "previous_value": None,
+            "category": "Startup - Current User",
+            "view": "64bit",
+            "reason": "Value contains suspicious pattern: powershell",
+            "status": "detected",
+        }
+        self.app._process_new_events([event])
+        initial_suspicious = self.app.suspicious_count
+
+        with patch("registry_scanner.delete_registry_value", return_value=(True, "Deleted successfully")):
+            with patch("tkinter.messagebox.askyesno", return_value=True):
+                with patch("tkinter.messagebox.showinfo"):
+                    self.app._remediate_selected_threat()
+
+        # Event should now be marked as REMEDIATED
+        remediated_event = next(e for e in self.app.events if e.get("event_id") == "threat-test-888")
+        self.assertEqual(remediated_event["status"], "REMEDIATED")
+        self.assertEqual(self.app.suspicious_count, max(0, initial_suspicious - 1))
+
+    def test_auto_clean_all_threats_batch(self):
+        """Verify batch remediation neutralizes all active suspicious events."""
+        event1 = {
+            "event_id": "batch-1",
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "change_type": "ADDED",
+            "severity": "suspicious",
+            "full_path": "HKCU\\Software\\Run",
+            "value_name": "Trojan1",
+            "current_value": "cmd.exe /c malware.exe",
+            "status": "detected"
+        }
+        event2 = {
+            "event_id": "batch-2",
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "change_type": "ADDED",
+            "severity": "investigation_required",
+            "full_path": "HKLM\\Software\\Run",
+            "value_name": "Trojan2",
+            "current_value": "mshta.exe http://evil.com",
+            "status": "detected"
+        }
+        self.app._process_new_events([event1, event2])
+
+        with patch("registry_scanner.delete_registry_value", return_value=(True, "Batch deleted")):
+            with patch("tkinter.messagebox.askyesno", return_value=True):
+                with patch("tkinter.messagebox.showinfo"):
+                    self.app._auto_clean_all_threats()
+
+        self.assertEqual(event1["status"], "REMEDIATED")
+        self.assertEqual(event2["status"], "REMEDIATED")
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

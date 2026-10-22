@@ -323,3 +323,42 @@ def verify_baseline_integrity(baseline: dict) -> bool:
     content = json.dumps(baseline_copy, indent=2, ensure_ascii=False)
     computed = hashlib.sha256(content.encode("utf-8")).hexdigest()
     return computed == stored_hash
+
+
+def delete_registry_value(hive_name: str, subkey: str, value_name: str, view: str = "64bit") -> tuple[bool, str]:
+    """Safely delete a suspicious or malicious registry value.
+    
+    Args:
+        hive_name: Hive identifier (e.g. 'HKEY_CURRENT_USER' or 'HKCU')
+        subkey: Registry path under hive (e.g. 'Software\\Microsoft\\Windows\\CurrentVersion\\Run')
+        value_name: Name of the registry value to delete
+        view: Architecture view ('64bit' or '32bit')
+        
+    Returns:
+        (success: bool, message: str)
+    """
+    hive_const = HIVE_MAP.get(hive_name)
+    if hive_const is None:
+        return False, f"Unsupported registry hive: {hive_name}"
+
+    access_flag = winreg.KEY_SET_VALUE
+    if view == "64bit":
+        access_flag |= winreg.KEY_WOW64_64KEY
+    elif view == "32bit":
+        access_flag |= winreg.KEY_WOW64_32KEY
+
+    try:
+        with winreg.OpenKey(hive_const, subkey, 0, access_flag) as key:
+            winreg.DeleteValue(key, value_name)
+        logger.info("Successfully deleted registry value: %s\\%s [%s]", hive_name, subkey, value_name)
+        return True, f"Registry value '{value_name}' was successfully deleted from {hive_name}\\{subkey}."
+    except PermissionError:
+        err_msg = f"Access denied deleting {hive_name}\\{subkey}\\{value_name}. Administrator privileges are required."
+        logger.warning(err_msg)
+        return False, err_msg
+    except FileNotFoundError:
+        return True, f"Value '{value_name}' was already removed or does not exist."
+    except Exception as e:
+        err_msg = f"Failed to delete registry value: {e}"
+        logger.error(err_msg)
+        return False, err_msg
