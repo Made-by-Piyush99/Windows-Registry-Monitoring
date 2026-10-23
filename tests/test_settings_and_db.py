@@ -218,23 +218,26 @@ class TestAutostart(unittest.TestCase):
 class TestSettingsWindow(unittest.TestCase):
     """Tests for AppSettingsWindow UI and callbacks."""
 
-    @classmethod
-    def setUpClass(cls):
-        import gc
-        gc.collect()
+    def setUp(self):
         try:
-            cls.root = tk.Tk()
-            cls.root.withdraw()
+            if tk._default_root is not None:
+                try:
+                    tk._default_root.destroy()
+                except Exception:
+                    pass
+                tk._default_root = None
         except Exception:
-            cls.root = tk._default_root
+            tk._default_root = None
+        self.root = tk.Tk()
+        self.root.withdraw()
 
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         try:
-            if hasattr(cls, "root") and cls.root:
-                cls.root.destroy()
+            if hasattr(self, "root") and self.root:
+                self.root.destroy()
         except Exception:
             pass
+        tk._default_root = None
 
     def test_settings_window_open_and_save(self):
         """Verify AppSettingsWindow initializes, reflects config, and invokes on_settings_applied callback."""
@@ -291,10 +294,14 @@ class TestMainAppIntegration(unittest.TestCase):
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
         try:
-            if tk._default_root is not None and tk._default_root.winfo_exists():
-                tk._default_root.destroy()
+            if tk._default_root is not None:
+                try:
+                    tk._default_root.destroy()
+                except Exception:
+                    pass
+                tk._default_root = None
         except Exception:
-            pass
+            tk._default_root = None
         self.app = RegistryMonitorApp()
         self.app.root.withdraw()
 
@@ -305,6 +312,7 @@ class TestMainAppIntegration(unittest.TestCase):
             self.app._force_close()
         except Exception:
             pass
+        tk._default_root = None
         if os.path.exists(self.test_dir):
             shutil.rmtree(self.test_dir, ignore_errors=True)
 

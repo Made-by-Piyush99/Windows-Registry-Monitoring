@@ -1174,6 +1174,9 @@ class RegistryMonitorApp:
         style.configure("Purple.TButton", background="#6d28d9", foreground="#ffffff", bordercolor="#a855f7", borderwidth=1, focusthickness=0, font=("Segoe UI", 9, "bold"))
         style.map("Purple.TButton", background=[("active", "#7c3aed")])
 
+        style.configure("Teal.TButton", background="#0d9488", foreground="#ffffff", bordercolor="#14b8a6", borderwidth=1, focusthickness=0, font=("Segoe UI", 9, "bold"))
+        style.map("Teal.TButton", background=[("active", "#0f766e"), ("disabled", "#1e293b")], foreground=[("disabled", "#64748b")])
+
         # Checkbutton and Entry styling
         style.configure("Dark.TCheckbutton", background=CARD_BG, foreground=FG_MUTED, font=("Segoe UI", 9))
         style.map("Dark.TCheckbutton", background=[("active", CARD_BG)], foreground=[("active", FG)])
@@ -1339,109 +1342,117 @@ class RegistryMonitorApp:
         controls = ttk.LabelFrame(main_frame, text="Operations & Control Center", style="Dark.TLabelframe", padding=8)
         controls.pack(fill=tk.X, pady=(0, 10))
 
-        # Row 1: Segmented Action Toolbar
-        btn_row = tk.Frame(controls, bg=CARD_BG)
-        btn_row.pack(fill=tk.X, pady=(0, 8))
-        self._themed_card_frames.append(btn_row)
+        # Row 1: Core Surveillance Engine & Background Controls
+        row1 = tk.Frame(controls, bg=CARD_BG)
+        row1.pack(fill=tk.X, pady=(0, 6))
+        self._themed_card_frames.append(row1)
 
-        # Left Ribbon: Core Engine Actions
-        left_ribbon = tk.Frame(btn_row, bg=CARD_BG)
-        left_ribbon.pack(side=tk.LEFT, fill=tk.Y)
-        self._themed_card_frames.append(left_ribbon)
+        # Row 1 Left: Core Surveillance & Baseline
+        r1_left = tk.Frame(row1, bg=CARD_BG)
+        r1_left.pack(side=tk.LEFT, fill=tk.Y)
+        self._themed_card_frames.append(r1_left)
 
-        self.btn_start = ttk.Button(left_ribbon, text="▶ Start Monitoring", style="Green.TButton", command=self._start_monitoring)
+        self.btn_start = ttk.Button(r1_left, text="▶ Start Monitoring", style="Green.TButton", command=self._start_monitoring)
         self.btn_start.pack(side=tk.LEFT, padx=(0, 4))
 
-        self.btn_stop = ttk.Button(left_ribbon, text="⏹ Stop Monitoring", style="Red.TButton", command=self._stop_monitoring, state=tk.DISABLED)
+        self.btn_stop = ttk.Button(r1_left, text="⏹ Stop Monitoring", style="Red.TButton", command=self._stop_monitoring, state=tk.DISABLED)
         self.btn_stop.pack(side=tk.LEFT, padx=3)
 
-        self.btn_rescan = ttk.Button(left_ribbon, text="🔄 Rescan Registry", style="Cyan.TButton", command=self._rescan_registry)
+        self.btn_rescan = ttk.Button(r1_left, text="🔄 Rescan Registry", style="Cyan.TButton", command=self._rescan_registry)
         self.btn_rescan.pack(side=tk.LEFT, padx=3)
 
-        ttk.Separator(left_ribbon, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=8)
+        ttk.Separator(r1_left, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=8)
 
-        self.btn_create_baseline = ttk.Button(left_ribbon, text="📋 Create Baseline", style="Dark.TButton", command=self._create_baseline)
+        self.btn_create_baseline = ttk.Button(r1_left, text="📋 Create Baseline", style="Dark.TButton", command=self._create_baseline)
         self.btn_create_baseline.pack(side=tk.LEFT, padx=3)
 
-        self.btn_reset = ttk.Button(left_ribbon, text="🗑 Reset Baseline", style="Dark.TButton", command=self._reset_baseline)
+        self.btn_reset = ttk.Button(r1_left, text="🗑 Reset Baseline", style="Dark.TButton", command=self._reset_baseline)
         self.btn_reset.pack(side=tk.LEFT, padx=3)
 
-        ttk.Separator(left_ribbon, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=6)
+        # Row 1 Right: Background Running & Settings (Always High Visibility)
+        r1_right = tk.Frame(row1, bg=CARD_BG)
+        r1_right.pack(side=tk.RIGHT, fill=tk.Y)
+        self._themed_card_frames.append(r1_right)
+
+        self.btn_run_backend = ttk.Button(r1_right, text="👻 Run in Background", style="Teal.TButton", command=self._run_in_background)
+        self.btn_run_backend.pack(side=tk.LEFT, padx=(0, 4))
+
+        self.btn_settings = ttk.Button(r1_right, text="⚙️ App Settings", style="Dark.TButton", command=self._open_settings)
+        self.btn_settings.pack(side=tk.LEFT, padx=3)
+
+        # Row 2: Threat Remediation, Deep Forensics & Analytics
+        row2 = tk.Frame(controls, bg=CARD_BG)
+        row2.pack(fill=tk.X, pady=(0, 6))
+        self._themed_card_frames.append(row2)
+
+        # Row 2 Left: Active Threat Defense Actions
+        r2_left = tk.Frame(row2, bg=CARD_BG)
+        r2_left.pack(side=tk.LEFT, fill=tk.Y)
+        self._themed_card_frames.append(r2_left)
 
         self.btn_remediate = ttk.Button(
-            left_ribbon, text="🛡️ Remediate Threat", style="Red.TButton",
+            r2_left, text="🛡️ Remediate Threat", style="Red.TButton",
             command=self._remediate_selected_threat
         )
-        self.btn_remediate.pack(side=tk.LEFT, padx=3)
+        self.btn_remediate.pack(side=tk.LEFT, padx=(0, 4))
 
         self.btn_auto_clean = ttk.Button(
-            left_ribbon, text="⚡ Auto-Clean Threats", style="Orange.TButton",
+            r2_left, text="⚡ Auto-Clean Threats", style="Orange.TButton",
             command=self._auto_clean_all_threats
         )
         self.btn_auto_clean.pack(side=tk.LEFT, padx=3)
 
-        # Right Ribbon: Forensics, Intelligence & Settings
-        right_ribbon = tk.Frame(btn_row, bg=CARD_BG)
-        right_ribbon.pack(side=tk.RIGHT, fill=tk.Y)
-        self._themed_card_frames.append(right_ribbon)
+        ttk.Separator(r2_left, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=8)
 
-        self.btn_advanced_monitor = ttk.Button(right_ribbon, text="🛡️ Advanced System Monitoring", style="Purple.TButton", command=self._advanced_system_monitoring)
+        self.btn_advanced_monitor = ttk.Button(r2_left, text="🛡️ Advanced System Monitoring", style="Purple.TButton", command=self._advanced_system_monitoring)
         self.btn_advanced_monitor.pack(side=tk.LEFT, padx=3)
 
-        self.btn_visual_report = ttk.Button(right_ribbon, text="📊 Graphical Report", style="Dark.TButton", command=self._show_visual_report)
+        self.btn_visual_report = ttk.Button(r2_left, text="📊 Graphical Report", style="Dark.TButton", command=self._show_visual_report)
         self.btn_visual_report.pack(side=tk.LEFT, padx=3)
 
-        self.btn_export = ttk.Button(right_ribbon, text="📁 Export Reports", style="Dark.TButton", command=self._export_report)
+        self.btn_export = ttk.Button(r2_left, text="📁 Export Reports", style="Dark.TButton", command=self._export_report)
         self.btn_export.pack(side=tk.LEFT, padx=3)
-
-        ttk.Separator(right_ribbon, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=8)
-
-        self.btn_settings = ttk.Button(right_ribbon, text="⚙️ App Settings", style="Dark.TButton", command=self._open_settings)
-        self.btn_settings.pack(side=tk.LEFT, padx=3)
-
-        self.btn_run_backend = ttk.Button(right_ribbon, text="👻 Run in Background", style="Dark.TButton", command=self._run_in_background)
-        self.btn_run_backend.pack(side=tk.LEFT, padx=(3, 0))
 
         # Compatibility alias
         self.btn_view_events = self.btn_visual_report
 
-        # Row 2: Live Search & Filter Bar + Stealth Controls
-        filter_row = tk.Frame(controls, bg=CARD_BG)
-        filter_row.pack(fill=tk.X, pady=(2, 0))
-        self._themed_card_frames.append(filter_row)
+        # Row 3: Live Telemetry Search & Stealth Controls
+        row3 = tk.Frame(controls, bg=CARD_BG)
+        row3.pack(fill=tk.X, pady=(2, 0))
+        self._themed_card_frames.append(row3)
 
-        lbl_s = tk.Label(filter_row, text="Search Telemetry:", bg=CARD_BG, fg=FG_MUTED, font=("Segoe UI", 8, "bold"))
+        lbl_s = tk.Label(row3, text="Search Telemetry:", bg=CARD_BG, fg=FG_MUTED, font=("Segoe UI", 8, "bold"))
         lbl_s.pack(side=tk.LEFT, padx=(0, 5))
         self._themed_labels.append(lbl_s)
 
-        self.search_entry = ttk.Entry(filter_row, textvariable=self.search_var, width=24, style="Dark.TEntry")
-        self.search_entry.pack(side=tk.LEFT, padx=(0, 10))
+        self.search_entry = ttk.Entry(row3, textvariable=self.search_var, width=22, style="Dark.TEntry")
+        self.search_entry.pack(side=tk.LEFT, padx=(0, 8))
         self.search_var.trace_add("write", lambda *args: self._on_search_filter_changed())
 
-        lbl_sev = tk.Label(filter_row, text="Severity Filter:", bg=CARD_BG, fg=FG_MUTED, font=("Segoe UI", 8, "bold"))
+        lbl_sev = tk.Label(row3, text="Severity Filter:", bg=CARD_BG, fg=FG_MUTED, font=("Segoe UI", 8, "bold"))
         lbl_sev.pack(side=tk.LEFT, padx=(0, 5))
         self._themed_labels.append(lbl_sev)
 
         self.severity_combo = ttk.Combobox(
-            filter_row, textvariable=self.severity_filter_var, state="readonly", width=18,
+            row3, textvariable=self.severity_filter_var, state="readonly", width=18,
             values=["All Severities", "Suspicious / Critical", "Investigation Required", "Informational", "Errors Only"]
         )
         self.severity_combo.pack(side=tk.LEFT, padx=(0, 8))
         self.severity_combo.bind("<<ComboboxSelected>>", self._on_search_filter_changed)
 
-        ttk.Button(filter_row, text="✕ Clear", style="Dark.TButton", command=self._clear_filters).pack(side=tk.LEFT, padx=(0, 14))
+        ttk.Button(row3, text="✕ Clear", style="Dark.TButton", command=self._clear_filters).pack(side=tk.LEFT, padx=(0, 10))
 
-        self.event_filter_count_label = tk.Label(filter_row, text="Showing all 0 events", bg=CARD_BG, fg=ACCENT, font=("Segoe UI", 8, "bold"))
+        self.event_filter_count_label = tk.Label(row3, text="Showing all 0 events", bg=CARD_BG, fg=ACCENT, font=("Segoe UI", 8, "bold"))
         self.event_filter_count_label.pack(side=tk.LEFT)
         self._themed_labels.append(self.event_filter_count_label)
 
         # Stealth controls on the right
         self.mute_var = tk.BooleanVar(value=False)
-        ttk.Checkbutton(filter_row, text="Mute Pop-ups", variable=self.mute_var, command=self._toggle_mute, style="Dark.TCheckbutton").pack(side=tk.RIGHT, padx=4)
+        ttk.Checkbutton(row3, text="Mute Pop-ups", variable=self.mute_var, command=self._toggle_mute, style="Dark.TCheckbutton").pack(side=tk.RIGHT, padx=4)
 
-        ttk.Checkbutton(filter_row, text="Hide Taskbar Icon", variable=self.hide_taskbar_var, command=self._toggle_hide_taskbar, style="Dark.TCheckbutton").pack(side=tk.RIGHT, padx=4)
+        ttk.Checkbutton(row3, text="Hide Taskbar Icon", variable=self.hide_taskbar_var, command=self._toggle_hide_taskbar, style="Dark.TCheckbutton").pack(side=tk.RIGHT, padx=4)
 
-        ttk.Checkbutton(filter_row, text="Minimize to Desktop Icon", variable=self.minimize_to_icon_var, style="Dark.TCheckbutton").pack(side=tk.RIGHT, padx=4)
+        ttk.Checkbutton(row3, text="Minimize to Desktop Icon", variable=self.minimize_to_icon_var, style="Dark.TCheckbutton").pack(side=tk.RIGHT, padx=4)
 
         # ========================================================
         # 4. EVENT TABLE (LIVE TELEMETRY STREAM)

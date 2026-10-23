@@ -75,13 +75,14 @@ class AppSettingsWindow(tk.Toplevel):
     def _center_window(self):
         """Center the settings dialog over the main window."""
         try:
-            self.update_idletasks()
-            pw = self.app.root.winfo_width()
-            ph = self.app.root.winfo_height()
-            px = self.app.root.winfo_x()
-            py = self.app.root.winfo_y()
-            w = self.winfo_width()
-            h = self.winfo_height()
+            if not self.winfo_exists():
+                return
+            pw = self.app.root.winfo_width() if hasattr(self.app.root, "winfo_width") else 1260
+            ph = self.app.root.winfo_height() if hasattr(self.app.root, "winfo_height") else 840
+            px = self.app.root.winfo_x() if hasattr(self.app.root, "winfo_x") else 100
+            py = self.app.root.winfo_y() if hasattr(self.app.root, "winfo_y") else 100
+            w = self.winfo_reqwidth() or 800
+            h = self.winfo_reqheight() or 600
             x = px + max(0, (pw - w) // 2)
             y = py + max(0, (ph - h) // 2)
             self.geometry(f"+{x}+{y}")

@@ -31,7 +31,14 @@
 - **Quick-Switch Header Badge**: Click the `⏱️ 5s Polling` badge in the application header to switch polling rates instantly via a drop-down menu.
 - **Visual Card Selector**: 6 selectable interactive cards with live hover states and active-status markers.
 
-### 3. 🎨 5 Pro Cyberpunk & SOC Themes
+### 3. 🖥️ Segmented Responsive Toolbar Architecture
+- **Zero-Clipping Ribbon Layout**: The Operations & Control Center has been restructured into 3 dedicated ribbons:
+  - **Ribbon 1 (Surveillance & Engine)**: `▶ Start Monitoring`, `⏹ Stop Monitoring`, `🔄 Rescan Registry`, `📋 Create Baseline`, `🗑 Reset Baseline`, plus prominent top-right `👻 Run in Background` and `⚙️ App Settings`.
+  - **Ribbon 2 (Threat Defense & Forensics)**: `🛡️ Remediate Threat`, `⚡ Auto-Clean Threats`, `🛡️ Advanced System Monitoring`, `📊 Graphical Report`, `📁 Export Reports`.
+  - **Ribbon 3 (Telemetry Filtering & Stealth)**: Real-time search entry, severity dropdown, clear button, and stealth checkboxes.
+- **Glowing Teal Background Button**: `👻 Run in Background` now features a dedicated glowing teal button style (`#0d9488` with `#14b8a6` border) and instant background minimization.
+
+### 4. 🎨 5 Pro Cyberpunk & SOC Themes
 - Switch seamlessly between 5 tailor-made themes designed for dark SOC environments:
   - 🌌 **Cyber Dark** (Default — Neon cyan `#00f0ff` & emerald `#10b981`)
   - 🟢 **Matrix SOC** (High-contrast phosphor green `#00ff66`)
@@ -39,7 +46,7 @@
   - 🌅 **Solar Flare** (Warm amber `#f59e0b` & crimson alerts)
   - ☀️ **Light Minimal** (Paper white high-readability daytime mode)
 
-### 4. 🔐 Enterprise Security & DPAPI Vault
+### 5. 🔐 Enterprise Security & DPAPI Vault
 - Webhook endpoints, API keys, and notification secrets are encrypted on-disk using the **Windows Data Protection API (DPAPI)** tied to the logged-in Windows user account.
 - Zero plaintext credential leakage in configuration files or logs.
 
@@ -49,8 +56,8 @@
 
 | Asset File | Size | Architecture | SHA-256 Verification Checksum |
 | :--- | :---: | :---: | :--- |
-| **`WindowsRegistryMonitor.exe`** | `80.22 MB` | Windows x64 | `03491B027AC7716D84F2F95712EE00ED76FB41758F8DE868E618FCF8B2B300CC` |
-| **`RegistryMonitorSetup.exe`** | `81.08 MB` | Windows x64 | `C531060EAB9A91ABDFC72A8C87A6462BB96CB9E9B043A3084028E6E79C09C713` |
+| **`WindowsRegistryMonitor.exe`** | `80.22 MB` | Windows x64 | `8BEE859BA0DA4527E1FEE42F4B946A21A102FB170BBFFA2724F5BDC56BD649FC` |
+| **`RegistryMonitorSetup.exe`** | `81.08 MB` | Windows x64 | `61B5C2109D5B3A150D989102D8EB04AC7C6A1A51D246445C7D724E2F69E50DD7` |
 
 > [!TIP]
 > **Verify integrity in PowerShell before executing:**

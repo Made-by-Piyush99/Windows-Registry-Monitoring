@@ -2,7 +2,7 @@
 ; Publisher: MADE BY PIYUSH
 
 #define MyAppName "Windows Registry Monitor"
-#define MyAppVersion "2.0.0"
+#define MyAppVersion "2.4.0"
 #define MyAppPublisher "MADE BY PIYUSH"
 #define MyAppExeName "WindowsRegistryMonitor.exe"
 
