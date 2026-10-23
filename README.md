@@ -35,9 +35,13 @@ A defensive, read-only Windows Registry auditing and forensics tool built with P
 | :---: | :---: |
 | ![Windows Startup Settings](assets/third.png) | ![Polling Interval Engine](assets/fourth.png) |
 
-| 5. Interactive Graphical Visual Report Viewer |
-| :---: |
-| ![Interactive Graphical Report](assets/fifth.png) |
+| 5. Interactive Graphical Visual Report Viewer | 6. Alert Policies & Notification Rules |
+| :---: | :---: |
+| ![Interactive Graphical Report](assets/fifth.png) | ![Alert Notification Rules](assets/sixth.png) |
+
+| 7. Local SQLite DB & DPAPI Encryption | 8. Movable Floating Desktop Gadget Widget |
+| :---: | :---: |
+| ![Encrypted Database Settings](assets/seventh.png) | ![Movable Floating Desktop Widget](assets/eighth.png) |
 
 ---
 
