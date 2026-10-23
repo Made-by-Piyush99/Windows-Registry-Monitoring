@@ -25,13 +25,19 @@ A defensive, read-only Windows Registry auditing and forensics tool built with P
 
 ---
 
-## 🖼️ Application Interface & Settings Showcase
+## 🖼️ Application Interface & Feature Showcase
 
-### 1. Operations & Defensive Telemetry Dashboard
-![Windows Registry Monitoring System Dashboard](assets/dashboard_main.png)
+| 1. Primary SOC Telemetry Dashboard (v2.4.0) | 2. Real-Time Desktop Pop-up Alerts |
+| :---: | :---: |
+| ![Primary SOC Dashboard](assets/first.png) | ![Real-Time Desktop Alerts](assets/second.png) |
 
-### 2. Continuous Polling Interval Configuration (1s to 60s)
-![Continuous Registry Polling Interval Settings](assets/polling_settings.png)
+| 3. Windows Startup & Background Launch | 4. Dynamic Polling Interval Selector (1s to 60s) |
+| :---: | :---: |
+| ![Windows Startup Settings](assets/third.png) | ![Polling Interval Engine](assets/fourth.png) |
+
+| 5. Interactive Graphical Visual Report Viewer |
+| :---: |
+| ![Interactive Graphical Report](assets/fifth.png) |
 
 ---
 
