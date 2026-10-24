@@ -40,6 +40,7 @@ data/*.bak
 data/*.tmp
 *.tmp
 *.bak
+~$*
 
 # --- Runtime Logs & Streaming Event Telemetry ---
 data/logs/*.log
