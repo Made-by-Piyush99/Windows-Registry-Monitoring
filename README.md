@@ -1,8 +1,25 @@
 # Windows Registry Change Monitoring System
 
+[![Live Website](https://img.shields.io/badge/Live%20Website-windows--registry--monitor--eight.vercel.app-00f0ff?style=for-the-badge&logo=vercel&logoColor=white)](https://windows-registry-monitor-eight.vercel.app)
+[![GitHub Release](https://img.shields.io/badge/Release-v2.4.0-10b981?style=for-the-badge&logo=github)](https://github.com/Made-by-Piyush99/Windows-Registry-Monitoring/releases/tag/v2.4.0)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20(64--bit)-8b5cf6?style=for-the-badge&logo=windows)](https://windows-registry-monitor-eight.vercel.app)
+[![Tests Passing](https://img.shields.io/badge/Tests-65%2F65%20Passing-brightgreen?style=for-the-badge)](tests/)
+
 A defensive, read-only Windows Registry auditing and forensics tool built with Python. Monitors critical system and user registry locations for unauthorized modifications, persistence mechanisms, and security policy tampering with instant desktop alerts, local hardware-encrypted telemetry, customizable cyber themes, and background autostart capabilities.
 
 > **⚠ Disclaimer**: This tool does NOT guarantee malware detection or complete system protection. It is an auditing aid that monitors specific registry paths for changes.
+
+---
+
+## 🌐 Official Website & Live Web Portal
+
+Explore the live web portal and download center deployed on Vercel:
+👉 **[https://windows-registry-monitor-eight.vercel.app](https://windows-registry-monitor-eight.vercel.app)**
+
+- ⚡ **Direct Installer Download**: Instant one-click download for `RegistryMonitorSetup.exe` (81.08 MB) and portable executable (80.22 MB).
+- 🖥️ **Interactive Interface Walkthrough**: 5 interactive tabs showcasing the SOC Dashboard, Desktop HUD, and Threat Remediation Engine.
+- 📄 **Academic Report**: Direct access to the complete 24-page PDF project report.
+- 🛡️ **Cryptographic Verification**: Pre-computed SHA-256 hashes and PowerShell verification commands.
 
 ---
 
@@ -208,7 +225,11 @@ Enable automatic monitoring whenever your computer starts:
 
 ## Installation & Deployment
 
-### Option A: Standalone Executable (No Python Required)
+### Option A: Web Portal Download (Recommended)
+Download the Windows Setup Installer or Portable Binary directly from the official website:
+👉 **[Download from windows-registry-monitor-eight.vercel.app](https://windows-registry-monitor-eight.vercel.app)**
+
+### Option B: Standalone Executable (No Python Required)
 Run the self-contained executable directly:
 ```cmd
 dist\WindowsRegistryMonitor.exe
