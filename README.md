@@ -81,8 +81,13 @@ This project includes a comprehensive suite of dedicated markdown manuals and pr
 ```
 D:\Windows Registry Monitoring System\
 │
+├── docs/
+│   ├── Windows_Registry_Change_Monitoring_System_Project_Report.docx # Complete academic project report
+│   ├── Windows_Registry_Change_Monitoring_System_Project_Report.pdf  # Formatted publication-ready PDF report
+│   ├── Windows_Registry_Monitoring_System_Presentation.pptx          # 16:9 Dark SOC PowerPoint slide deck
+│   └── presentation.html                                             # Interactive animated HTML5 presentation deck
 ├── dist/
-│   ├── WindowsRegistryMonitor.exe             # Standalone pre-compiled single-file executable (~76 MB)
+│   ├── WindowsRegistryMonitor.exe             # Standalone pre-compiled single-file executable (~80 MB)
 │   └── installer/
 │       └── RegistryMonitorSetup.exe           # Inno Setup 7 Windows Installer setup package
 │
@@ -233,13 +238,13 @@ python main.py
 
 ## Running Automated Tests
 
-All 61 unit tests can be executed with Python's standard `unittest` framework:
+All 65 unit tests can be executed with Python's standard `unittest` framework:
 
 ```cmd
-python -m unittest tests/test_settings_and_db.py tests/test_change_detector.py
+python -m unittest discover tests
 ```
 
-All 61 tests run in ~3.5 seconds using mock data and do not modify the real Windows Registry.
+All 65 tests pass cleanly across all modules (including core engines, rules, DPAPI vault, remediation, and GUI settings).
 
 ---
 
@@ -247,5 +252,5 @@ All 61 tests run in ~3.5 seconds using mock data and do not modify the real Wind
 
 - **Application**: Windows Registry Change Monitoring System
 - **Publisher**: MADE BY PIYUSH
-- **Version**: 2.0.0
+- **Version**: 2.4.0 (Production Release)
 - **License**: Educational & Defensive Security Use

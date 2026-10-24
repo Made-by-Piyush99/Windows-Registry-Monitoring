@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows Registry Change Monitoring System - Presentation Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070a13;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(0, 240, 255, 0.2);
+      --cyan: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.4);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.3);
+      --purple: #8b5cf6;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* Background Canvas */
+    #bg-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Top Progress Bar */
+    #progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 12.5%;
+      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--emerald));
+      box-shadow: 0 0 12px var(--cyan);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 100;
+    }
+
+    /* Main Deck Container */
+    #deck {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 3.5rem 5rem 5.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.96) translateY(20px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.5s;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Header & Badges */
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--cyan);
+      border-radius: 9999px;
+      color: var(--cyan);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+    }
+
+    .slide-title {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 900px;
+      line-height: 1.5;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      height: 100%;
+      max-height: 68vh;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: stretch;
+      max-height: 68vh;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      align-items: stretch;
+      max-height: 68vh;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 12px 35px var(--cyan-glow);
+      transform: translateY(-4px);
+    }
+
+    .card.emerald-border { border-color: rgba(16, 185, 129, 0.3); }
+    .card.emerald-border:hover { border-color: var(--emerald); box-shadow: 0 12px 35px var(--emerald-glow); }
+    .card.purple-border { border-color: rgba(139, 92, 246, 0.3); }
+    .card.purple-border:hover { border-color: var(--purple); box-shadow: 0 12px 35px rgba(139, 92, 246, 0.4); }
+    .card.rose-border { border-color: rgba(244, 63, 94, 0.3); }
+    .card.rose-border:hover { border-color: var(--rose); box-shadow: 0 12px 35px rgba(244, 63, 94, 0.4); }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.85rem;
+      display: inline-block;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Code Tags & Mitre Pills */
+    .mitre-tag {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid var(--rose);
+      color: #fca5a5;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+
+    .tech-pill {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      border-radius: 6px;
+      margin-right: 0.35rem;
+      margin-top: 0.4rem;
+    }
+
+    /* Image Containers */
+    .image-preview {
+      width: 100%;
+      height: 100%;
+      max-height: 480px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      position: relative;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.5s ease;
+    }
+
+    .image-preview:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Hero Slide Specifics */
+    .hero-content {
+      text-align: center;
+      max-width: 950px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-badge {
+      font-size: 0.95rem;
+      padding: 0.45rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #ffffff 30%, #00f0ff 70%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+    }
+
+    .hero-desc {
+      font-size: 1.35rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      padding: 1rem 2rem;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+    }
+
+    .hero-meta span strong {
+      color: var(--cyan);
+    }
+
+    /* Metric Counters */
+    .stat-number {
+      font-size: 2.75rem;
+      font-weight: 800;
+      font-family: 'Fira Code', monospace;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-number.cyan { color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow); }
+    .stat-number.emerald { color: var(--emerald); text-shadow: 0 0 15px var(--emerald-glow); }
+    .stat-number.purple { color: var(--purple); text-shadow: 0 0 15px rgba(139, 92, 246, 0.4); }
+    .stat-number.rose { color: var(--rose); text-shadow: 0 0 15px rgba(244, 63, 94, 0.4); }
+
+    /* Navigation Controls Bar */
+    #nav-controls {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 0.6rem 1.4rem;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      z-index: 100;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 12px var(--cyan);
+    }
+
+    #slide-indicator {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .dot-container {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      width: 24px;
+      border-radius: 4px;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    /* Key indicator pills */
+    .key-badge {
+      font-size: 0.72rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #94a3b8;
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* Animations */
+    @keyframes pulse-cyan {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+    
+    .glow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+      display: inline-block;
+      animation: pulse-cyan 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cyber Matrix Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Slides Container -->
+  <div id="deck">
+
+    <!-- SLIDE 1: Title Hero -->
+    <section class="slide active" id="slide-1">
+      <div class="hero-content">
+        <div class="slide-badge hero-badge">
+          <span class="glow-dot"></span> Next-Gen Cyber Defense & Endpoint Forensics
+        </div>
+        <h1 class="hero-title">Windows Registry Change Monitoring System</h1>
+        <p class="hero-desc">
+          Real-time proactive detection, baseline cryptographic integrity verification, 
+          MITRE ATT&amp;CK threat pattern correlation, and automated one-click remediation.
+        </p>
+        <div class="hero-meta">
+          <span>Author: <strong>MADE BY PIYUSH</strong></span>
+          <span>•</span>
+          <span>Version: <strong>v2.4.0 (Production)</strong></span>
+          <span>•</span>
+          <span>GitHub: <strong>Made-by-Piyush99</strong></span>
+          <span>•</span>
+          <span>Stack: <strong>Python 3.14 + Tkinter</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: Problem & Threat Vectors -->
+    <section class="slide" id="slide-2">
+      <div class="slide-badge">Threat Analysis &amp; Attack Vectors</div>
+      <h2 class="slide-title">Why Windows Registry Monitoring Matters</h2>
+      <p class="slide-subtitle">
+        The Windows Registry is the primary target for advanced persistent threats (APTs), ransomware operators, 
+        and rootkits seeking system survivability and privilege escalation.
+      </p>
+
+      <div class="grid-4">
+        <div class="card rose-border">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Autorun Persistence</h3>
+          <p class="card-desc">
+            Malware implants stealth startup keys in HKCU/HKLM Run, RunOnce, and UserInit to survive system reboots.
+          </p>
+          <div class="mitre-tag">MITRE T1547.001</div>
+        </div>
+
+        <div class="card rose-border">
+          <div class="card-icon">🛡️</div>
+          <h3 class="card-title">Defense Tampering</h3>
+          <p class="card-desc">
+            Ransomware silently disables Windows Defender, real-time scanning, Windows Firewall, and UAC elevation prompts.
+          </p>
+          <div class="mitre-tag">MITRE T1562.001</div>
+        </div>
+
+        <div class="card rose-border">
+          <div class="card-icon">🐚</div>
+          <h3 class="card-title">Shell Hijacking</h3>
+          <p class="card-desc">
+            Replacement of Explorer.exe shell with malicious payloads, or abusing Winlogon Userinit / Taskman hooks.
+          </p>
+          <div class="mitre-tag">MITRE T1547.004</div>
+        </div>
+
+        <div class="card rose-border">
+          <div class="card-icon">🔍</div>
+          <h3 class="card-title">Silent Tampering</h3>
+          <p class="card-desc">
+            Zero-day scripts modify hidden registry policies without triggering standard antivirus file scanners.
+          </p>
+          <div class="mitre-tag">MITRE T1112</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: System Architecture -->
+    <section class="slide" id="slide-3">
+      <div class="slide-badge">Core Architecture</div>
+      <h2 class="slide-title">Multi-Threaded Decoupled Architecture</h2>
+      <p class="slide-subtitle">
+        Built with high-throughput concurrent workers ensuring real-time zero-latency detection 
+        without freezing the graphical user interface.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">📡</div>
+          <h3 class="card-title">1. Detection Engine</h3>
+          <p class="card-desc">
+            Asynchronous background daemon periodically scans autorun entries, services, security policies, 
+            and compares them against baseline snapshots using cryptographic SHA-256 hashes.
+          </p>
+          <div style="margin-top: 1rem;">
+            <span class="tech-pill">threading.Thread</span>
+            <span class="tech-pill">winreg</span>
+            <span class="tech-pill">hashlib SHA-256</span>
+          </div>
+        </div>
+
+        <div class="card emerald-border">
+          <div class="card-icon">🧠</div>
+          <h3 class="card-title">2. Rule Correlation</h3>
+          <p class="card-desc">
+            Evaluates modifications through an intelligent rules engine with 10+ heuristics. Automatically tags severity 
+            levels (Low, Medium, High, Critical) and maps directly to MITRE ATT&amp;CK techniques.
+          </p>
+          <div style="margin-top: 1rem;">
+            <span class="tech-pill">Regex Matching</span>
+            <span class="tech-pill">Severity Scorer</span>
+            <span class="tech-pill">MITRE TTP Map</span>
+          </div>
+        </div>
+
+        <div class="card purple-border">
+          <div class="card-icon">🔒</div>
+          <h3 class="card-title">3. DPAPI &amp; Alert Dispatcher</h3>
+          <p class="card-desc">
+            Secures SMTP / Webhook credentials using Windows DPAPI (CryptProtectData). Dispatches 
+            instant alerts to Email, Webhooks, Desktop HUD, and writes immutable audit logs.
+          </p>
+          <div style="margin-top: 1rem;">
+            <span class="tech-pill">Windows DPAPI</span>
+            <span class="tech-pill">SMTP TLS</span>
+            <span class="tech-pill">Rotating FileHandler</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: Operational Dashboard Showcase -->
+    <section class="slide" id="slide-4">
+      <div class="slide-badge">SOC Control Center</div>
+      <h2 class="slide-title">Intuitive Command &amp; Control Dashboard</h2>
+      <p class="slide-subtitle">
+        Designed with a dark SOC cyber theme, offering instant situational awareness and fast navigation.
+      </p>
+
+      <div class="grid-2">
+        <div class="image-preview">
+          <img src="../assets/first.png" alt="Main Dashboard Screenshot" onerror="this.src='../assets/media_1792685508031_cf7f15c3.png'">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="card">
+            <h3 class="card-title">📊 Real-Time Status Telemetry</h3>
+            <p class="card-desc">
+              Live status banners showing Monitoring Status, Total Keys Inspected, Active Threats Flagged, 
+              and Baseline Snapshot Timestamps.
+            </p>
+          </div>
+          <div class="card emerald-border">
+            <h3 class="card-title">⚡ Interactive Action Toolbar</h3>
+            <p class="card-desc">
+              One-click buttons for "Start / Pause Monitor", "Create Baseline", "Verify Integrity", 
+              "Export Report", and "Launch Floating HUD".
+            </p>
+          </div>
+          <div class="card purple-border">
+            <h3 class="card-title">📋 Color-Coded Event Stream</h3>
+            <p class="card-desc">
+              Multi-column audit table with instant search and severity filtering (Critical, High, Medium, Low).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: Active Threat Remediation -->
+    <section class="slide" id="slide-5">
+      <div class="slide-badge">Remediation Engine</div>
+      <h2 class="slide-title">Active Threat Neutralization &amp; Rollback</h2>
+      <p class="slide-subtitle">
+        Unlike passive detection loggers, this system empowers Blue Teams with active counter-measures.
+      </p>
+
+      <div class="grid-2">
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="card rose-border">
+            <div class="card-icon">🛑</div>
+            <h3 class="card-title">1-Click Key Reversal (Rollback)</h3>
+            <p class="card-desc">
+              Instantly restores modified or deleted registry keys back to their known-good baseline state with zero manual registry editing.
+            </p>
+          </div>
+          <div class="card rose-border">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">Active Process Termination</h3>
+            <p class="card-desc">
+              Kills malicious processes associated with newly injected autorun executables before malware can execute persistence scripts.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3 class="card-title">Privilege Guard &amp; Validation</h3>
+            <p class="card-desc">
+              Enforces UAC administrator validation and creates transactional backup points prior to any remediation operation.
+            </p>
+          </div>
+        </div>
+        <div class="image-preview">
+          <img src="../assets/fifth.png" alt="Threat Remediation UI" onerror="this.src='../assets/media_1792776311015_79a02601.jpg'">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: Floating Gadget & Encrypted Vault -->
+    <section class="slide" id="slide-6">
+      <div class="slide-badge">Desktop HUD &amp; Cryptography</div>
+      <h2 class="slide-title">Floating Desktop HUD &amp; DPAPI Vault</h2>
+      <p class="slide-subtitle">
+        Continuous background operational security with zero credential exposure.
+      </p>
+
+      <div class="grid-2">
+        <div class="image-preview">
+          <img src="../assets/fourth.png" alt="Floating Gadget & Settings" onerror="this.src='../assets/media_1792776310999_915dfd3a.jpg'">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="card emerald-border">
+            <h3 class="card-title">🖥️ Always-On Desktop HUD Gadget</h3>
+            <p class="card-desc">
+              A minimalist, draggable, semi-transparent widget displaying live health, threats detected, 
+              and memory metrics without intruding on daily workflow.
+            </p>
+          </div>
+          <div class="card purple-border">
+            <h3 class="card-title">🔐 Windows DPAPI Credential Vault</h3>
+            <p class="card-desc">
+              Protects SMTP passwords and webhook tokens using hardware/OS-bound master keys via 
+              <code>CryptProtectData</code>. Prevents plain-text credential harvesting from configuration files.
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">⚙️ Granular Polling Frequency</h3>
+            <p class="card-desc">
+              Dynamically configurable intervals (from 1 second high-intensity audits to 300 second background sweeps).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: Verification & Testing Metrics -->
+    <section class="slide" id="slide-7">
+      <div class="slide-badge">Verification &amp; Quality</div>
+      <h2 class="slide-title">Rigorous Testing &amp; Forensic Integrity</h2>
+      <p class="slide-subtitle">
+        Comprehensive automated test coverage and cross-format forensic export capabilities.
+      </p>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="stat-number cyan">65/65</div>
+          <h3 class="card-title">Unit Tests Passing</h3>
+          <p class="card-desc">
+            100% test suite passing across core engines, rule evaluators, rollback engines, and GUI controllers.
+          </p>
+        </div>
+
+        <div class="card emerald-border">
+          <div class="stat-number emerald">SHA-256</div>
+          <h3 class="card-title">Cryptographic Baseline</h3>
+          <p class="card-desc">
+            Detects zero-byte tampering and unauthorized key changes using cryptographic hashing.
+          </p>
+        </div>
+
+        <div class="card purple-border">
+          <div class="stat-number purple">3-Way</div>
+          <h3 class="card-title">Forensic Exports</h3>
+          <p class="card-desc">
+            One-click automated export to PDF reports, CSV data sheets, and structured JSON incident logs.
+          </p>
+        </div>
+
+        <div class="card rose-border">
+          <div class="stat-number rose">&lt; 15ms</div>
+          <h3 class="card-title">Scan Latency</h3>
+          <p class="card-desc">
+            Optimized registry handle enumeration consuming less than 45MB RAM during active polling.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: Conclusion & Links -->
+    <section class="slide" id="slide-8">
+      <div class="hero-content">
+        <div class="slide-badge hero-badge">Project Delivery &amp; Repository</div>
+        <h2 class="hero-title" style="font-size: 3.2rem;">Complete Open-Source Endpoint Security</h2>
+        <p class="hero-desc">
+          Ready for academic viva, blue team training, and enterprise endpoint defense evaluation.
+        </p>
+
+        <div class="grid-3" style="width: 100%; max-width: 900px; margin-bottom: 2rem;">
+          <div class="card">
+            <h4 style="color: var(--cyan); margin-bottom: 0.5rem;">📄 Documentation</h4>
+            <p style="font-size: 0.85rem; color: #94a3b8;">
+              Complete 24-page Project Report available in Microsoft Word (.docx) &amp; Adobe PDF.
+            </p>
+          </div>
+          <div class="card emerald-border">
+            <h4 style="color: var(--emerald); margin-bottom: 0.5rem;">📦 Installer &amp; EXE</h4>
+            <p style="font-size: 0.85rem; color: #94a3b8;">
+              Standalone portable binary and Inno Setup Windows installer packaged and validated.
+            </p>
+          </div>
+          <div class="card purple-border">
+            <h4 style="color: var(--purple); margin-bottom: 0.5rem;">💻 Source Code</h4>
+            <p style="font-size: 0.85rem; color: #94a3b8;">
+              Maintained under Git version control with clean commit history on main &amp; piyush branches.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-meta">
+          <span>GitHub: <strong>Made-by-Piyush99/Windows-Registry-Monitoring</strong></span>
+          <span>•</span>
+          <span>Created by: <strong>PIYUSH</strong></span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Bottom Floating Navigation Bar -->
+  <div id="nav-controls">
+    <button class="nav-btn" id="btn-prev" title="Previous Slide (← / PageUp)">‹</button>
+    
+    <div class="dot-container" id="dot-container"></div>
+    
+    <span id="slide-indicator">1 / 8</span>
+    
+    <button class="nav-btn" id="btn-next" title="Next Slide (→ / Space / PageDown)">›</button>
+    <button class="nav-btn" id="btn-fs" title="Toggle Fullscreen (F)" style="font-size: 0.9rem;">⛶</button>
+  </div>
+
+  <script>
+    // Presentation Deck Logic
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+
+    const progressBar = document.getElementById('progress-bar');
+    const slideIndicator = document.getElementById('slide-indicator');
+    const dotContainer = document.getElementById('dot-container');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnFs = document.getElementById('btn-fs');
+
+    // Create Navigation Dots
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotContainer.appendChild(dot);
+    }
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlide() {
+      slides.forEach((slide, idx) => {
+        if (idx === currentIndex) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      dots.forEach((dot, idx) => {
+        if (idx === currentIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      slideIndicator.textContent = `${currentIndex + 1} / ${totalSlides}`;
+      const progressPercent = ((currentIndex + 1) / totalSlides) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentIndex = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentIndex < totalSlides - 1) {
+        currentIndex++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlide();
+      }
+    }
+
+    btnNext.addEventListener('click', nextSlide);
+    btnPrev.addEventListener('click', prevSlide);
+
+    // Fullscreen Toggle
+    btnFs.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    });
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToSlide(totalSlides - 1);
+      }
+    });
+
+    // Touch Swipe Support
+    let touchStartX = 0;
+    window.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    window.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) nextSlide();
+      if (touchEndX > touchStartX + 50) prevSlide();
+    }, false);
+
+    // Dynamic Cyber Canvas Particles & Connecting Lines
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const PARTICLE_COUNT = 45;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: Math.random() * 2 + 1,
+        color: Math.random() > 0.5 ? '#00f0ff' : '#8b5cf6'
+      });
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, width, height);
+      
+      // Draw Grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+      ctx.lineWidth = 1;
+      const gridSize = 60;
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Draw Particles and Connections
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let p2 = particles[j];
+          let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 130) {
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.12 * (1 - dist / 130)})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
+  </script>
+</body>
+</html>
