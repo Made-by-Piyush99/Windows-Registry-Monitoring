@@ -17,6 +17,7 @@ import os
 import sys
 import threading
 import time
+import webbrowser
 import tkinter as tk
 from datetime import datetime, timezone
 from pathlib import Path
@@ -1273,6 +1274,16 @@ class RegistryMonitorApp:
         )
         self.btn_header_settings.pack(side=tk.LEFT, padx=(6, 0))
 
+        # Header Feedback & Review Portal Button
+        self.btn_header_feedback = tk.Button(
+            header_right, text="💬 Feedback & Review",
+            bg="#0f766e", fg="#ffffff", activebackground="#14b8a6", activeforeground="#ffffff",
+            font=("Segoe UI", 8, "bold"), padx=10, pady=3, bd=1, relief=tk.SOLID,
+            highlightbackground="#2dd4bf", highlightthickness=1, cursor="hand2",
+            command=self._open_feedback_portal
+        )
+        self.btn_header_feedback.pack(side=tk.LEFT, padx=(6, 0))
+
         # ========================================================
         # 2. SPACIOUS 5 KPI SCORECARDS (WITH ACCENT COLOR BARS)
         # ========================================================
@@ -1716,6 +1727,18 @@ class RegistryMonitorApp:
     def _open_settings(self):
         """Open the Application Settings & Engine Configuration dialog."""
         AppSettingsWindow(self, self._on_settings_applied)
+
+    def _open_feedback_portal(self):
+        """Open the online feedback & evaluation portal in the user's default browser."""
+        url = "https://windows-registry-monitor-feedback.vercel.app"
+        try:
+            webbrowser.open_new_tab(url)
+        except Exception:
+            messagebox.showinfo(
+                "Feedback & Review Portal",
+                f"Please open your web browser and visit:\n{url}",
+                parent=self.root
+            )
 
     def _on_settings_applied(self, new_config: dict):
         """Handle settings saved and applied from the settings dialog."""
