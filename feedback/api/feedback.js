@@ -1,41 +1,8 @@
 // Vercel Serverless Function: Feedback Management
 const CLOUD_STORAGE_URL = 'https://kvdb.io/8n9b3rNgy9wGWHd5VjAshV/feedbacks';
 
-// In-memory fallback cache across lambda warm invocations
-let memoryCache = [
-  {
-    id: 'fb_init_01',
-    type: 'student',
-    name: 'Aarav Sharma',
-    email: 'aarav.sharma@dtu.ac.in',
-    rating: 5,
-    institution: 'Delhi Technological University (DTU)',
-    course: 'B.Tech CSE / Cybersecurity',
-    conceptClarity: 5,
-    uiRating: 5,
-    readiness: 'Capstone / Final Year Level (Exceptional)',
-    favoriteFeatures: ['Real-Time Registry Polling', '1-Click Threat Remediation', 'Always-On Desktop HUD Gadget'],
-    implementationSuggestions: 'Please implement an automated quarantine directory for newly detected autorun binaries and add Windows Event Log (ETW) correlation.',
-    testimonial: 'The real-time registry detection and atomic rollback mechanism is exceptionally well-engineered. Perfect final year capstone project!',
-    createdAt: '2026-11-03T15:30:00.000Z'
-  },
-  {
-    id: 'fb_init_02',
-    type: 'company',
-    name: 'Rohit Verma',
-    email: 'rohit.verma@quickheal.com',
-    rating: 5,
-    company: 'QuickHeal Technologies',
-    designation: 'SOC Analyst / Blue Team Engineer',
-    practicality: 5,
-    securityRating: 5,
-    hireability: 'Ready for SOC Analyst / Security Developer Role',
-    enterpriseRecommendations: ['Centralized SIEM / Syslog Forwarding', 'YARA Rule Scanning on Autorun Files'],
-    implementationSuggestions: 'Consider adding YARA pattern scanning on executables found in Run/RunOnce keys to detect packed malware before registry execution.',
-    testimonial: 'Strong systems programming with clean Windows DPAPI security architecture. Very promising candidate for blue team and endpoint defense roles.',
-    createdAt: '2026-11-03T14:15:00.000Z'
-  }
-];
+// In-memory fallback cache across lambda warm invocations (empty by default - only real users)
+let memoryCache = [];
 
 // Helper to fetch current feedbacks from cloud store
 async function getStoredFeedbacks() {
@@ -195,7 +162,12 @@ export default async function handler(req, res) {
   // DELETE: Remove feedback (Admin only)
   if (req.method === 'DELETE') {
     try {
-      const { id } = req.query || req.body || {};
+      let bodyData = req.body;
+      if (typeof bodyData === 'string') {
+        try { bodyData = JSON.parse(bodyData); } catch (_) {}
+      }
+      const id = req.query?.id || bodyData?.id;
+
       if (!id) {
         return res.status(400).json({ success: false, error: 'Feedback ID is required for deletion' });
       }

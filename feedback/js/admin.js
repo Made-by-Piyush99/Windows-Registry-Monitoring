@@ -220,6 +220,16 @@ function renderFeedbacks() {
   showingText.textContent = `Showing ${filtered.length} of ${allFeedbacks.length} records`;
 
   if (filtered.length === 0) {
+    if (allFeedbacks.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">📥</div>
+          <h3>No Submissions Yet (Clean Live State)</h3>
+          <p>Zero fake or mock users. Real student and enterprise evaluation submissions will appear here live in real-time.</p>
+        </div>
+      `;
+      return;
+    }
     container.innerHTML = `
       <div class="empty-state">
         <div class="empty-state-icon">🔍</div>
