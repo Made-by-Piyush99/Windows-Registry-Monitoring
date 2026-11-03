@@ -1,6 +1,7 @@
 # Windows Registry Change Monitoring System
 
 [![Live Website](https://img.shields.io/badge/Live%20Website-windows--registry--monitor--eight.vercel.app-00f0ff?style=for-the-badge&logo=vercel&logoColor=white)](https://windows-registry-monitor-eight.vercel.app)
+[![Feedback Portal](https://img.shields.io/badge/💬%20Feedback%20Portal-Live%20on%20Vercel-f59e0b?style=for-the-badge&logo=vercel&logoColor=white)](https://windows-registry-monitor-feedback.vercel.app)
 [![GitHub Release](https://img.shields.io/badge/Release-v2.4.0-10b981?style=for-the-badge&logo=github)](https://github.com/Made-by-Piyush99/Windows-Registry-Monitoring/releases/tag/v2.4.0)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20(64--bit)-8b5cf6?style=for-the-badge&logo=windows)](https://windows-registry-monitor-eight.vercel.app)
 [![Tests Passing](https://img.shields.io/badge/Tests-65%2F65%20Passing-brightgreen?style=for-the-badge)](tests/)
@@ -20,6 +21,7 @@ Explore the live web portal and download center deployed on Vercel:
 - 🖥️ **Interactive Interface Walkthrough**: 5 interactive tabs showcasing the SOC Dashboard, Desktop HUD, and Threat Remediation Engine.
 - 📄 **Academic Report**: Direct access to the complete 24-page PDF project report.
 - 🛡️ **Cryptographic Verification**: Pre-computed SHA-256 hashes and PowerShell verification commands.
+- 💬 **Evaluation & Feedback Portal**: **[windows-registry-monitor-feedback.vercel.app](https://windows-registry-monitor-feedback.vercel.app)** with role-based student/company surveys, feature suggestion tracking, and secure Admin Console at `/admin`.
 
 ---
 

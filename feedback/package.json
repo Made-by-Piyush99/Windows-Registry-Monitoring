@@ -1,0 +1,12 @@
+{
+  "name": "windows-registry-monitor-feedback",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Feedback & Evaluation Portal for Windows Registry Change Monitoring System",
+  "main": "api/feedback.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "author": "Piyush",
+  "license": "MIT"
+}

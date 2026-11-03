@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Operations Center | Windows Registry Monitoring System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient light gradients -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
+
+  <!-- Header Navigation -->
+  <header class="top-nav">
+    <a href="/" class="brand-link">
+      <div class="brand-icon">🛡️</div>
+      <div class="brand-text">
+        <h1>Windows Registry Monitor</h1>
+      </div>
+      <span class="brand-badge" style="background: rgba(139, 92, 246, 0.15); color: var(--purple); border-color: rgba(139, 92, 246, 0.3);">
+        Admin Console
+      </span>
+    </a>
+
+    <div class="nav-actions">
+      <a href="/" target="_blank" class="nav-btn btn-ghost">
+        ↗ Open Public Form
+      </a>
+      <div id="auth-nav-items" style="display: none;">
+        <span id="admin-user-display" style="font-size: 0.85rem; color: #cbd5e1; font-weight: 600; margin-right: 0.75rem;"></span>
+        <button class="nav-btn btn-ghost" onclick="handleLogout()" style="color: var(--rose); border-color: rgba(244, 63, 94, 0.3);">
+          🚪 Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main>
+
+    <!-- VIEW 1: ADMIN LOGIN SCREEN (Default when not logged in) -->
+    <div class="container" id="admin-login-view">
+      <div class="admin-login-box">
+        <div class="admin-login-header">
+          <div class="shield-icon">🔐</div>
+          <h2>Admin Authentication</h2>
+          <p>Sign in to access student &amp; company evaluation records.</p>
+        </div>
+
+        <form id="admin-login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Administrator Email</label>
+            <input type="email" id="login-email" value="admin@registrymonitor.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <input type="password" id="login-password" value="admin123" required autocomplete="current-password">
+          </div>
+
+          <button type="submit" id="btn-login" class="btn-submit" style="margin-top: 1.25rem;">
+            <span>🔓 Sign In to Admin Console</span>
+          </button>
+        </form>
+
+        <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); text-align: center;">
+          <p style="font-size: 0.78rem; color: var(--text-dim); font-family: var(--font-mono);">
+            Default Credentials:<br>
+            <span style="color: var(--cyan);">admin@registrymonitor.com</span> • <span style="color: var(--cyan);">admin123</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: AUTHENTICATED ADMIN DASHBOARD -->
+    <div class="container-wide" id="admin-dashboard-view" style="display: none;">
+
+      <!-- Top Title -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2 style="font-size: 2rem; font-weight: 800; color: #fff;">Evaluation &amp; Feedback Telemetry</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Review submissions, candidate appraisals, and specific implementation suggestions.</p>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="btn-tool" onclick="exportCSV()" title="Export all feedback to CSV format">
+            📥 Export to CSV
+          </button>
+          <button class="btn-tool" onclick="exportJSON()" title="Export all feedback to JSON">
+            📥 Export to JSON
+          </button>
+          <button class="btn-tool" onclick="fetchFeedbacks()" title="Reload from Cloud Database">
+            🔄 Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Ribbon Cards -->
+      <div class="kpi-ribbon">
+        <div class="kpi-card">
+          <div class="kpi-num cyan" id="kpi-total">0</div>
+          <div class="kpi-label">Total Submissions</div>
+          <div class="kpi-sub" id="kpi-total-sub">0 reviews received</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-num cyan" id="kpi-students">0</div>
+          <div class="kpi-label">🎓 Student Reviews</div>
+          <div class="kpi-sub" id="kpi-student-rating">Avg: 0.0 ★</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-num emerald" id="kpi-companies">0</div>
+          <div class="kpi-label">🏢 Company Reviews</div>
+          <div class="kpi-sub" id="kpi-company-rating">Avg: 0.0 ★</div>
+        </div>
+
+        <div class="kpi-card" style="border-color: var(--border-amber); cursor: pointer;" onclick="toggleImplementationFilter()" title="Click to filter by implementation suggestions">
+          <div class="kpi-num amber" id="kpi-suggestions">0</div>
+          <div class="kpi-label">💡 Feature Suggestions</div>
+          <div class="kpi-sub" id="kpi-suggestions-sub">Click to filter entries</div>
+        </div>
+      </div>
+
+      <!-- Toolbar: Search & Filters -->
+      <div class="admin-toolbar">
+        <div class="toolbar-left">
+          <div class="search-input-wrap">
+            <input type="text" id="search-box" placeholder="🔍 Search by name, email, college, company..." oninput="handleSearch(this.value)">
+          </div>
+
+          <div class="filter-btn-group">
+            <button class="filter-btn active" id="filter-all" onclick="setFilter('all')">All (<span id="count-all">0</span>)</button>
+            <button class="filter-btn" id="filter-student" onclick="setFilter('student')">🎓 Students (<span id="count-student">0</span>)</button>
+            <button class="filter-btn emerald" id="filter-company" onclick="setFilter('company')">🏢 Companies (<span id="count-company">0</span>)</button>
+            <button class="filter-btn amber" id="filter-suggestions" onclick="setFilter('suggestions')">💡 Has Suggestions (<span id="count-suggestions">0</span>)</button>
+          </div>
+        </div>
+
+        <div class="toolbar-right">
+          <span style="font-size: 0.82rem; color: var(--text-dim); font-family: var(--font-mono);" id="showing-text">
+            Showing 0 of 0 records
+          </span>
+        </div>
+      </div>
+
+      <!-- Feedbacks Stream -->
+      <div class="feedback-feed" id="feedbacks-container">
+        <!-- Dynamically populated by admin.js -->
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast">
+    <span id="toast-icon">✓</span>
+    <span id="toast-text">Success message</span>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluation & Feedback | Windows Registry Change Monitoring System</title>
+  <meta name="description" content="Submit academic or industry review, feature suggestions, and feedback for Windows Registry Change Monitoring System.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient light gradients -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
+
+  <!-- Header Navigation -->
+  <header class="top-nav">
+    <a href="https://windows-registry-monitor-eight.vercel.app" class="brand-link" target="_blank" title="Go to main application site">
+      <div class="brand-icon">🛡️</div>
+      <div class="brand-text">
+        <h1>Windows Registry Monitor</h1>
+      </div>
+      <span class="brand-badge">Feedback Portal</span>
+    </a>
+
+    <div class="nav-actions">
+      <a href="https://windows-registry-monitor-eight.vercel.app" target="_blank" class="nav-btn btn-ghost">
+        ← Official Website
+      </a>
+      <a href="/admin" class="nav-btn btn-admin">
+        🔐 Admin Login
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <div class="form-hero">
+      <div class="hero-pill">
+        <span>●</span> Peer, Academic &amp; Industry Evaluation
+      </div>
+      <h2>Project Feedback &amp; Review</h2>
+      <p>
+        Your insights help improve the architecture, defensive capabilities, and real-world readiness of the Windows Registry Monitoring System.
+      </p>
+    </div>
+
+    <!-- Role Selection Tabs -->
+    <div class="role-tabs">
+      <div class="role-tab active" id="tab-student" onclick="setRole('student')">
+        <div class="role-icon">🎓</div>
+        <div class="role-details">
+          <h3>Student / Academic Reviewer</h3>
+          <p>College peers, professors, students &amp; viva evaluators</p>
+        </div>
+      </div>
+
+      <div class="role-tab" id="tab-company" onclick="setRole('company')">
+        <div class="role-icon">🏢</div>
+        <div class="role-details">
+          <h3>Company / Industry Professional</h3>
+          <p>SOC analysts, security engineers &amp; recruiters</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Submission Form -->
+    <form id="feedback-form" class="form-card" onsubmit="handleSubmit(event)">
+
+      <!-- SECTION 1: Basic Reviewer Details -->
+      <div class="form-section">
+        <div class="section-legend">
+          <span>👤 Basic Information</span>
+          <span class="legend-badge cyan">Required</span>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="input-name">Full Name <span class="req">*</span></label>
+            <input type="text" id="input-name" placeholder="e.g. Piyush Sharma" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-email">Email Address <span class="req">*</span></label>
+            <input type="email" id="input-email" placeholder="e.g. name@example.com" required>
+          </div>
+        </div>
+
+        <!-- Overall Rating -->
+        <div class="form-group" style="margin-top: 0.5rem;">
+          <label class="form-label">Overall Project Experience <span class="req">*</span></label>
+          <div class="star-rating-box">
+            <div class="star-rating" id="rating-overall" data-rating="5">
+              <span class="star active" data-value="1">★</span>
+              <span class="star active" data-value="2">★</span>
+              <span class="star active" data-value="3">★</span>
+              <span class="star active" data-value="4">★</span>
+              <span class="star active" data-value="5">★</span>
+            </div>
+            <span class="rating-desc" id="rating-overall-text">5.0 / 5.0 (Exceptional)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2A: STUDENT FIELDS (Visible when student tab selected) -->
+      <div class="form-section" id="student-section">
+        <div class="section-legend">
+          <span>🎓 Academic Evaluation Metrics</span>
+          <span class="legend-badge cyan">Student Review</span>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="input-institution">College / University / Institute <span class="req">*</span></label>
+            <input type="text" id="input-institution" placeholder="e.g. Delhi Technological University / IIT / NIT">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-course">Course / Specialization <span class="opt">(Optional)</span></label>
+            <input type="text" id="input-course" placeholder="e.g. B.Tech Computer Science / Cybersecurity">
+          </div>
+        </div>
+
+        <!-- Star Ratings: Concept Clarity -->
+        <div class="form-group">
+          <label class="form-label">Concept Clarity: Registry &amp; MITRE ATT&amp;CK Understanding <span class="req">*</span></label>
+          <div class="star-rating-box">
+            <div class="star-rating" id="rating-concept" data-rating="5">
+              <span class="star active" data-value="1">★</span>
+              <span class="star active" data-value="2">★</span>
+              <span class="star active" data-value="3">★</span>
+              <span class="star active" data-value="4">★</span>
+              <span class="star active" data-value="5">★</span>
+            </div>
+            <span class="rating-desc" id="rating-concept-text">5.0 / 5.0 (Very Clear &amp; Educational)</span>
+          </div>
+        </div>
+
+        <!-- Star Ratings: UI Polish -->
+        <div class="form-group">
+          <label class="form-label">UI Design &amp; Dark SOC Theme Polish <span class="req">*</span></label>
+          <div class="star-rating-box">
+            <div class="star-rating" id="rating-ui" data-rating="5">
+              <span class="star active" data-value="1">★</span>
+              <span class="star active" data-value="2">★</span>
+              <span class="star active" data-value="3">★</span>
+              <span class="star active" data-value="4">★</span>
+              <span class="star active" data-value="5">★</span>
+            </div>
+            <span class="rating-desc" id="rating-ui-text">5.0 / 5.0 (High Polish)</span>
+          </div>
+        </div>
+
+        <!-- Academic Readiness Radio -->
+        <div class="form-group">
+          <label class="form-label">Academic Project / Viva Readiness <span class="req">*</span></label>
+          <div class="radio-cards">
+            <label class="radio-card">
+              <input type="radio" name="readiness" value="Capstone / Final Year Level (Exceptional)" checked>
+              <span class="radio-label">🏆 <strong>Capstone / Final Year Project Level</strong> (Production &amp; Defense Ready)</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="readiness" value="Very Good Minor/Major Project">
+              <span class="radio-label">⭐ <strong>Strong Major / Minor Academic Project</strong></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="readiness" value="Good Educational Prototype">
+              <span class="radio-label">💡 <strong>Good Educational Prototype</strong></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Favorite Features -->
+        <div class="form-group">
+          <label class="form-label">Favorite Features Liked <span class="opt">(Select all that apply)</span></label>
+          <div class="checkbox-grid">
+            <label class="checkbox-item">
+              <input type="checkbox" name="student_fav" value="Real-Time Registry Polling" checked>
+              <span>⚡ Real-Time Registry Polling</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="student_fav" value="1-Click Threat Remediation" checked>
+              <span>🛡️ 1-Click Rollback / Threat Clean</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="student_fav" value="Always-On Desktop HUD Gadget" checked>
+              <span>🖥️ Floating Desktop HUD Gadget</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="student_fav" value="DPAPI Encrypted Vault">
+              <span>🔐 Hardware-Bound DPAPI Vault</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="student_fav" value="Visual Infographics & PDF Reports">
+              <span>📊 High-Res PDF/CSV Infographics</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="student_fav" value="65/65 Automated Unit Tests">
+              <span>🧪 100% Passing Unit Test Suite</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2B: COMPANY / RECRUITER FIELDS (Visible when company tab selected) -->
+      <div class="form-section" id="company-section" style="display: none;">
+        <div class="section-legend">
+          <span>🏢 Industry &amp; Recruiter Evaluation</span>
+          <span class="legend-badge emerald">Professional Review</span>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="input-company">Company / Organization <span class="req">*</span></label>
+            <input type="text" id="input-company" placeholder="e.g. Microsoft, CrowdStrike, Deloitte, Infosys, Startup">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-designation">Designation / Role <span class="req">*</span></label>
+            <select id="input-designation">
+              <option value="SOC Analyst / Blue Team Engineer">SOC Analyst / Blue Team Engineer</option>
+              <option value="Security Researcher / DFIR Specialist">Security Researcher / DFIR Specialist</option>
+              <option value="Technical Recruiter / Talent Acquisition">Technical Recruiter / Talent Acquisition</option>
+              <option value="Software Engineer / Systems Developer">Software Engineer / Systems Developer</option>
+              <option value="Security Manager / Team Lead">Security Manager / Team Lead</option>
+              <option value="Other Industry Professional">Other Industry Professional</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Star Ratings: Practicality -->
+        <div class="form-group">
+          <label class="form-label">Defensive Practicality &amp; Real-World Threat Utility <span class="req">*</span></label>
+          <div class="star-rating-box">
+            <div class="star-rating" id="rating-practicality" data-rating="5">
+              <span class="star active" data-value="1">★</span>
+              <span class="star active" data-value="2">★</span>
+              <span class="star active" data-value="3">★</span>
+              <span class="star active" data-value="4">★</span>
+              <span class="star active" data-value="5">★</span>
+            </div>
+            <span class="rating-desc" id="rating-practicality-text">5.0 / 5.0 (High Endpoint Value)</span>
+          </div>
+        </div>
+
+        <!-- Star Ratings: Security Architecture -->
+        <div class="form-group">
+          <label class="form-label">Security Architecture (DPAPI, AES-256, Win32 API) <span class="req">*</span></label>
+          <div class="star-rating-box">
+            <div class="star-rating" id="rating-security" data-rating="5">
+              <span class="star active" data-value="1">★</span>
+              <span class="star active" data-value="2">★</span>
+              <span class="star active" data-value="3">★</span>
+              <span class="star active" data-value="4">★</span>
+              <span class="star active" data-value="5">★</span>
+            </div>
+            <span class="rating-desc" id="rating-security-text">5.0 / 5.0 (Enterprise Architectural Standards)</span>
+          </div>
+        </div>
+
+        <!-- Candidate Competency Radio -->
+        <div class="form-group">
+          <label class="form-label">Candidate Technical Evaluation / Hireability <span class="req">*</span></label>
+          <div class="radio-cards">
+            <label class="radio-card">
+              <input type="radio" name="hireability" value="Ready for SOC Analyst / Security Developer Role" checked>
+              <span class="radio-label">🚀 <strong>Ready for SOC Analyst / Security Software Developer Role</strong></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="hireability" value="Strong Systems Programming & Cybersecurity Fundamentals">
+              <span class="radio-label">🌟 <strong>Strong Core Systems Programming &amp; Defensive Fundamentals</strong></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="hireability" value="Promising Entry Level Candidate">
+              <span class="radio-label">🔧 <strong>Promising Entry-Level / Needs More Enterprise Exposure</strong></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Enterprise Recommendations -->
+        <div class="form-group">
+          <label class="form-label">Enterprise Recommendations for Scaling <span class="opt">(Optional)</span></label>
+          <div class="checkbox-grid">
+            <label class="checkbox-item">
+              <input type="checkbox" name="company_rec" value="Centralized SIEM / Syslog Forwarding">
+              <span>🌐 SIEM / Splunk / ELK Forwarding</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="company_rec" value="YARA Rule Scanning on Autorun Files">
+              <span>🔍 YARA Rules on Autorun PE Files</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="company_rec" value="Kernel Minifilter Driver (Real-time Notify)">
+              <span>🛡️ Kernel Minifilter Driver</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="company_rec" value="Remote Fleet Agent Architecture">
+              <span>💻 Remote Multi-Endpoint Fleet Agent</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: SPECIFIC IMPLEMENTATION SUGGESTIONS (Special Requested Feature) -->
+      <div class="form-section">
+        <div class="implementation-box">
+          <div class="implementation-header">
+            <span style="font-size: 1.3rem;">💡</span>
+            <h4>Implementation Suggestions / Kaha Kya Implement Karne Ki Zaroorat Hai</h4>
+            <span class="legend-badge amber" style="margin-left: auto;">Optional</span>
+          </div>
+          <p class="implementation-help">
+            What specific features, technical enhancements, or forensic modules should Piyush implement in the next version? (e.g. Linux support, automated quarantine, cloud alert dashboard, specific registry paths).
+          </p>
+          <textarea id="input-implementation" rows="3" placeholder="Apne specific technical suggestions yahan share karein... (e.g. Add YARA scanning for autorun binaries, or integrate Discord webhook alerts)"></textarea>
+        </div>
+      </div>
+
+      <!-- SECTION 4: Testimonial & Review Notes -->
+      <div class="form-section">
+        <div class="section-legend">
+          <span>💬 Overall Feedback / Testimonial</span>
+          <span class="legend-badge cyan">Optional</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="input-testimonial">Review &amp; Recommendation Note for Piyush</label>
+          <textarea id="input-testimonial" rows="3" placeholder="Share your experience, encouragement, or a recommendation quote that can be showcased on Piyush's portfolio / LinkedIn..."></textarea>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="btn-submit" class="btn-submit">
+        <span>🚀 Submit Feedback &amp; Review</span>
+      </button>
+
+    </form>
+
+  </main>
+
+  <!-- Success Modal Overlay -->
+  <div class="modal-overlay" id="success-modal">
+    <div class="modal-card">
+      <div class="modal-icon">🎉</div>
+      <h3>Feedback Submitted!</h3>
+      <p id="modal-msg">
+        Thank you for reviewing the Windows Registry Change Monitoring System. Your valuable feedback has been securely stored and sent to Piyush.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button class="nav-btn btn-admin" onclick="closeModal()">Submit Another</button>
+        <a href="https://windows-registry-monitor-eight.vercel.app" class="nav-btn btn-ghost">Back to Main App</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast">
+    <span id="toast-icon">✓</span>
+    <span id="toast-text">Feedback submitted successfully!</span>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
